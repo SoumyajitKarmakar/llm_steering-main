@@ -16,7 +16,8 @@ from sklearn.model_selection import train_test_split
 #  python runner1.py >> ../all_gitignore/sk2_items/RR_logs/log_seed1.txt 2>&1
 
 # SEED = 0
-SEED = 1
+# SEED = 1
+SEED = 2
 
 torch.manual_seed(SEED)
 torch.cuda.manual_seed(SEED)

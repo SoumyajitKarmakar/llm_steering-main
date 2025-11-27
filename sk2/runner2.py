@@ -99,16 +99,16 @@ torch.backends.cuda.matmul.allow_tf32 = True
 # with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_07_fixed_({fixed}).pkl', 'wb') as file:
 #     pickle.dump((test_weights, test_biases), file)
 
-# ------------------------------------------------------------------------
-#  python runner2.py > RR_logs/log_force4.txt 2>&1
-with open('RR_ckpt/LRR/llama8b/lrr_models.pkl', 'rb') as file:
-    lrr_models = pickle.load(file)
+# # ------------------------------------------------------------------------
+# #  python runner2.py > RR_logs/log_force4.txt 2>&1
+# with open('RR_ckpt/LRR/llama8b/lrr_models.pkl', 'rb') as file:
+#     lrr_models = pickle.load(file)
 
-fixed = 3
-test_weights, test_biases = force_ones_fixed(lrr_models, fixed=fixed)
+# fixed = 3
+# test_weights, test_biases = force_ones_fixed(lrr_models, fixed=fixed)
 
-with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_fixed_({fixed}).pkl', 'wb') as file:
-    pickle.dump((test_weights, test_biases), file)
+# with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_fixed_({fixed}).pkl', 'wb') as file:
+#     pickle.dump((test_weights, test_biases), file)
 
 # # ------------------------------------------------------------------------
 # with open('RR_ckpt/LRR/llama8b/lrr_models_04.pkl', 'rb') as file:
@@ -129,3 +129,38 @@ with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_fixed_({fixed}).
 
 # with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_07_fixed_({fixed}).pkl', 'wb') as file:
 #     pickle.dump((test_weights, test_biases), file)
+
+# ------------------------------------------------------------------------
+#  python runner2.py >> ../all_gitignore/sk2_items/RR_logs/log_force_5.txt 2>&1
+with open('../all_gitignore/sk2_items/RR_ckpt/LRR/llama8b/lrr_models.pkl', 'rb') as file:
+    lrr_models = pickle.load(file)
+
+# fixed = 5
+# fixed = 7
+fixed = 10
+# fixed = 15
+test_weights, test_biases = force_ones_fixed(lrr_models, fixed=fixed)
+
+with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_fixed_({fixed}).pkl', 'wb') as file:
+    pickle.dump((test_weights, test_biases), file)
+
+# # ------------------------------------------------------------------------NR
+# with open('RR_ckpt/LRR/llama8b/lrr_models_04.pkl', 'rb') as file:
+#     lrr_models = pickle.load(file)
+
+# fixed = 5
+# test_weights, test_biases = force_ones_fixed(lrr_models, fixed=fixed)
+
+# with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_04_fixed_({fixed}).pkl', 'wb') as file:
+#     pickle.dump((test_weights, test_biases), file)
+
+# # ------------------------------------------------------------------------NR
+# with open('RR_ckpt/LRR/llama8b/lrr_models_07.pkl', 'rb') as file:
+#     lrr_models = pickle.load(file)
+
+# fixed = 5
+# test_weights, test_biases = force_ones_fixed(lrr_models, fixed=fixed)
+
+# with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_07_fixed_({fixed}).pkl', 'wb') as file:
+#     pickle.dump((test_weights, test_biases), file)
+

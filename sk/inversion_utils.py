@@ -29,6 +29,7 @@ from tqdm import tqdm
 
 
 from sklearn.linear_model import RidgeCV
+from sklearn.linear_model import Ridge
 
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
@@ -175,7 +176,7 @@ def compare_cosine(concept1, concept2):
     return total_c
 
 
-def just_dirs(llm, concept, path='../directions_moods/'):
+def just_dirs(llm, concept, path='../all_gitignore/directions_moods/'):
     tcontroller = NeuralController(
         llm,
         llm.tokenizer,
@@ -189,7 +190,7 @@ def just_dirs(llm, concept, path='../directions_moods/'):
     return tcontroller.directions
 
 
-def load_controller(llm, concept, path='../directions_moods/'):
+def load_controller(llm, concept, path='../all_gitignore/directions_moods/'):
     tcontroller = NeuralController(
         llm,
         llm.tokenizer,
@@ -343,16 +344,19 @@ def LRR_auto(X, Y):
         x = X[i].cpu().numpy()
         y = Y[i].cpu().numpy()
 
-        alphas = 10.0 ** np.arange(-1, 6)  # log grid
+        # alphas = 10.0 ** np.arange(-1, 6)  # log grid
+        # reg_lrr = make_pipeline(StandardScaler(), RidgeCV(alphas=alphas, cv=10))
 
-        reg_lrr = make_pipeline(StandardScaler(), RidgeCV(alphas=alphas, cv=10))
+        reg_lrr = make_pipeline(StandardScaler(), Ridge(alpha=10000.0, solver='cholesky'))
+        
         model_lrr = TransformedTargetRegressor(regressor=reg_lrr, transformer=StandardScaler())
 
         model_lrr.fit(x, y)
 
-        best_alpha_lrr = model_lrr.regressor_.named_steps["ridgecv"].alpha_
+        # best_alpha_lrr = model_lrr.regressor_.named_steps["ridgecv"].alpha_
+        # print(f"Layer: {i}, best lambda: {best_alpha_lrr}")
 
-        print(f"Layer: {i}, best lambda: {best_alpha_lrr}")
+        print(f"Layer {i} done.")
 
         # xtx = x.T @ x
         # A = torch.linalg.solve(xtx + lambda_reg * torch.eye(d).to("cuda"), x.T @ y) # switch to more robust
@@ -555,7 +559,10 @@ def KRR(X, Y, kernel="laplacian", lambda_reg=0.1, gamma=0.001):
 def get_W_b(model_lrr):
     # Fitted objects
     pipe = model_lrr.regressor_                       # the fitted Pipeline
-    ridge = pipe.named_steps["ridgecv"]               # the fitted RidgeCV
+    try:
+        ridge = pipe.named_steps["ridgecv"]               # the fitted RidgeCV
+    except:
+        ridge = pipe.named_steps["ridge"]
     scaler_x = pipe.named_steps["standardscaler"]     # X StandardScaler
     scaler_y = model_lrr.transformer_                 # y StandardScaler (from TTR)
 
@@ -605,6 +612,7 @@ def force_ones(models, thresh=0.1):
     return new_models, biases
 
 def force_ones_fixed(models, fixed=5):
+    print(f"Runing with fixed={fixed}")
     new_models = {}
     biases = {}
 
@@ -618,13 +626,15 @@ def force_ones_fixed(models, fixed=5):
             if np.abs(i.imag) > 0.01:
                 print(f"First Imaginary problem: {i}")
 
-        eigen_w_new = [0.0 for i in eigen_w]
+        eigen_w_new = np.zeros_like(eigen_w, dtype=float)
 
-        for i in range(fixed):
-            eigen_w_new[i] = 1.0
-            eigen_w_new[-1*(i+1)] = 1.0
+        sort_idxs = np.argsort(eigen_w.real)
+
+        eigen_w_new[sort_idxs[-fixed:]] = 1.0
+        eigen_w_new[sort_idxs[:fixed]] = -1.0
 
         new_mo = eigen_v @ np.diag(eigen_w_new) @ inv(eigen_v)
+
         for i in new_mo:
             if np.max(np.abs(i.imag)) > 0.01:
                 print(f"Second Imaginary problem: {i}")

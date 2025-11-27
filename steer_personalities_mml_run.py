@@ -123,10 +123,18 @@ def main():
     # lowers = [True, True, True, False, False]
     # dataset_labels = ['fears', 'personalities', 'moods', 'places', 'personas']
 
-    fnames = ['data/moods/moods_antonyms.txt',]
+    # # -------------------------------------------------------------------------------
+    # fnames = ['data/moods/moods_antonyms.txt',]
+    # lowers = [True,]
+    # dataset_labels = ['moods',]
+    # save_path = 'directions_moods/'
+
+    # -------------------------------------------------------------------------------
+    # fnames = ['data/moods/moods_intensity.txt',]
+    fnames = ['data/moods/moods_intensity_leftover.txt',]
     lowers = [True,]
     dataset_labels = ['moods',]
-    save_path = 'directions_moods/'
+    save_path = 'all_gitignore/directions_moods_intensity_llama/'
 
     model_type = 'llama'
     MODEL_VERSION='3.1'
