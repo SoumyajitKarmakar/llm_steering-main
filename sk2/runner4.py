@@ -35,13 +35,44 @@ torch.backends.cuda.matmul.allow_tf32 = True
 # with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_07_fixed_({fixed}).pkl', 'wb') as file:
 #     pickle.dump((test_weights, test_biases), file)
 
-# ------------------------------------------------------------------------
-with open('RR_ckpt/LRR/llama8b/lrr_models_07.pkl', 'rb') as file:
+# # ------------------------------------------------------------------------
+# with open('RR_ckpt/LRR/llama8b/lrr_models_07.pkl', 'rb') as file:
+#     lrr_models = pickle.load(file)
+
+# fixed = 3
+# test_weights, test_biases = force_ones_fixed(lrr_models, fixed=fixed)
+
+# with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_07_fixed_({fixed}).pkl', 'wb') as file:
+#     pickle.dump((test_weights, test_biases), file)
+    
+# ------------------------------------------------------------------------todo
+# python runner4.py >> /scratch/bbjr/skarmakar/neuinv/sk2_items/RR_logs/3log_genadj_fixed_polar_5.txt 2>&1
+
+category = "state"
+print(category)
+
+with open(f'/scratch/bbjr/skarmakar/neuinv/sk2_items/adj_ckpt/LRR/llama8b/{category}_models.pkl', 'rb') as file:
     lrr_models = pickle.load(file)
 
-fixed = 3
-test_weights, test_biases = force_ones_fixed(lrr_models, fixed=fixed)
+fixed = 5
 
-with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_07_fixed_({fixed}).pkl', 'wb') as file:
+test_weights, test_biases = force_ones_fixed_polar(lrr_models, fixed=fixed)
+
+with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/gen_adj/Wb_fixed_polar_({category})({fixed}).pkl', 'wb') as file:
     pickle.dump((test_weights, test_biases), file)
-    
+
+
+category = "social"
+print(category)
+
+with open(f'/scratch/bbjr/skarmakar/neuinv/sk2_items/adj_ckpt/LRR/llama8b/{category}_models.pkl', 'rb') as file:
+    lrr_models = pickle.load(file)
+
+fixed = 5
+
+test_weights, test_biases = force_ones_fixed_polar(lrr_models, fixed=fixed)
+
+with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/gen_adj/Wb_fixed_polar_({category})({fixed}).pkl', 'wb') as file:
+    pickle.dump((test_weights, test_biases), file)
+
+

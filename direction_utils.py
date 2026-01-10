@@ -524,3 +524,62 @@ def train_linear_probe_on_concept(train_X, train_y, val_X, val_y, use_bias=False
         bias = 0
         
     return line, bias
+
+
+if __name__ == "__main__":
+    import torch
+    import numpy as np
+    import time
+
+    # Set seeds for reproducibility (same as above)
+    torch.manual_seed(42)
+    np.random.seed(42)
+
+    # Create SAME synthetic test data
+    n_train = 200
+    n_val = 50
+    d = 512
+    concept_dims = 5
+
+    train_X = torch.randn(n_train, d).cuda()
+    val_X = torch.randn(n_val, d).cuda()
+
+    train_y = (train_X[:, 0] > 0).float().unsqueeze(1).cuda()
+    val_y = (val_X[:, 0] > 0).float().unsqueeze(1).cuda()
+
+    train_X[:, :concept_dims] += train_y * 2.0
+    val_X[:, :concept_dims] += val_y * 2.0
+
+    hyperparams = {'n_components': 1, 'rfm_iters': 10, 'forward_batch_size': 16}
+
+    # Import and run original
+    from direction_utils import train_rfm_probe_on_concept
+
+    print("Running original adit_rfm version...")
+    start_time = time.time()
+    u_orig = train_rfm_probe_on_concept(
+        train_X.clone(), train_y.clone(), 
+        val_X.clone(), val_y.clone(), 
+        hyperparams,
+        bws=[1, 10, 100]
+    )
+    orig_time = time.time() - start_time
+
+    print(f"Original completed in {orig_time:.2f}s")
+    if u_orig is not None:
+        # Flatten to 1D if needed (handles both 1D and 2D outputs)
+        u_orig = u_orig.flatten()
+        
+        print(f"Steering vector shape: {u_orig.shape}")
+        print(f"Steering vector norm: {torch.norm(u_orig).item():.4f}")
+        
+        top_k = 10
+        top_indices = torch.argsort(torch.abs(u_orig), descending=True)[:top_k]
+        print(f"Top {top_k} dimensions:")
+        for i, idx in enumerate(top_indices):
+            print(f"  Dim {idx.item()}: {u_orig[idx].item():.4f}")
+        
+        # Reshape to column vector for matrix multiplication
+        val_preds = val_X @ u_orig.reshape(-1, 1)
+        val_corr = torch.corrcoef(torch.cat((val_preds, val_y), dim=-1).T)[0, 1].item()
+        print(f"Validation correlation: {val_corr:.4f}")

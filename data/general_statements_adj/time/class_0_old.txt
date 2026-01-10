@@ -1,0 +1,399 @@
+The construction of the city hall.
+
+The journey across the Atlantic Ocean.
+
+The growth of the oak tree.
+
+The development of the new software.
+
+The history of the ancient civilization.
+
+The movement of the tectonic plates.
+
+The duration of the ceremony.
+
+The lifespan of the insect.
+
+The reaction of the chemical mixture.
+
+The transition between the seasons.
+
+The renovation of the historic building.
+
+The flight from London to New York.
+
+The evolution of the species.
+
+The decay of the organic material.
+
+The waiting period for the results.
+
+The era of peace in the region.
+
+The moment of impact.
+
+The creation of the universe.
+
+The healing process of the injury.
+
+The response time of the server.
+
+The spread of the news story.
+
+The adoption of the new policy.
+
+The movement of the glacier.
+
+The rhythm of the drum beat.
+
+The lifecycle of the product.
+
+The reign of the monarch.
+
+The career of the athlete.
+
+The friendship between the two neighbors.
+
+The laws governing the society.
+
+The architecture of the downtown area.
+
+The race to the finish line.
+
+The fading of the daylight.
+
+The persistence of the memory.
+
+The arrival of the train at the station.
+
+The deadline for the project submission.
+
+The manuscript found in the library.
+
+The idea proposed by the scientist.
+
+The shelter built in the woods.
+
+The solution to the problem.
+
+The changing of the guard.
+
+The flow of the river downstream.
+
+The rotation of the planet.
+
+The blinking of an eye.
+
+The passing of the summer storm.
+
+The fermentation of the wine.
+
+The compilation of the code.
+
+The download of the file.
+
+The geological epoch.
+
+The sunrise over the mountains.
+
+The marathon runner's pace.
+
+The dynasty that ruled the land.
+
+The update to the operating system.
+
+The ruins on the hillside.
+
+The train moving along the tracks.
+
+The movement of the tortoise.
+
+The message sent via the app.
+
+The ritual performed by the group.
+
+The design of the spaceship.
+
+The battery life of the device.
+
+The cooking time for the meal.
+
+The lecture given by the professor.
+
+The vacation to the coast.
+
+The rise of the empire.
+
+The fall of the kingdom.
+
+The erosion of the cliff face.
+
+The spinning of the top.
+
+The blooming of the flower.
+
+The interval between the musical notes.
+
+The frequency of the visits.
+
+The delay in the schedule.
+
+The traffic during rush hour.
+
+The stillness of the night.
+
+The tools used by the workers.
+
+The weaponry displayed in the museum.
+
+The computer sitting on the desk.
+
+The bread coming out of the oven.
+
+The crackers in the pantry.
+
+The child playing in the park.
+
+The woman sitting on the porch.
+
+The dog sleeping by the fire.
+
+The turtle moving across the sand.
+
+The start of the movie.
+
+The end of the book.
+
+The prologue of the story.
+
+The epilogue of the novel.
+
+The sprint to the bus stop.
+
+The stroll through the garden.
+
+The nap taken in the afternoon.
+
+The coma of the patient.
+
+The gap between the generations.
+
+The millisecond recorded by the timer.
+
+The eternity spent waiting.
+
+The thought passing through the mind.
+
+The legacy of the founder.
+
+The classic car in the garage.
+
+The fashion trend.
+
+The slang used by the teenagers.
+
+The philosophy of the scholar.
+
+The car driving down the highway.
+
+The concept of time travel.
+
+The blinking of the turn signal.
+
+The duration of the phone call.
+
+The decay of the radioactive isotope.
+
+The movement of the clouds across the sky.
+
+The waiting time at the doctor's office.
+
+The flight of the arrow.
+
+The bullet speeding towards the target.
+
+The growth of the stalactite in the cave.
+
+The processing of the data.
+
+The lifespan of the mayfly.
+
+The age of the wine in the bottle.
+
+The era depicted in the movie.
+
+The style of the dress.
+
+The method used for farming.
+
+The machinery in the old factory.
+
+The ruins of the amphitheater.
+
+The prototype of the vehicle.
+
+The gadget released this year.
+
+The fossil embedded in the rock.
+
+The tablet found in the archaeological dig.
+
+The ritual of the tea ceremony.
+
+The coding language used for the project.
+
+The music played on the radio.
+
+The car driving on the autobahn.
+
+The bicycle ride through the park.
+
+The jet flying overhead.
+
+The snail climbing the wall.
+
+The turtle crossing the road.
+
+The cheetah hunting in the savannah.
+
+The sloth hanging from the branch.
+
+The blooming of the rare flower.
+
+The erosion of the riverbank.
+
+The flash of the camera.
+
+The melting of the snowman.
+
+The cooking of the instant noodles.
+
+The roasting of the turkey.
+
+The brewing of the tea.
+
+The aging of the cheese.
+
+The renovation of the kitchen.
+
+The construction of the bridge.
+
+The shift of the tectonic plates.
+
+The rotation of the galaxy.
+
+The orbit of the satellite.
+
+The fall of the meteor.
+
+The rise of the sun.
+
+The setting of the moon.
+
+The change of the seasons.
+
+The arrival of the bus.
+
+The departure of the ship.
+
+The loading of the webpage.
+
+The buffering of the video.
+
+The download of the file.
+
+The installation of the update.
+
+The sending of the letter.
+
+The delivery of the email.
+
+The growth of the puppy.
+
+The life of the butterfly.
+
+The reign of the king.
+
+The term of the agreement.
+
+The history of the building.
+
+The future of the company.
+
+The memory of the past.
+
+The speed of the internet connection.
+
+The pace of the runner.
+
+The tempo of the music.
+
+The rhythm of the dance.
+
+The flow of the traffic.
+
+The current of the river.
+
+The drift of the smoke.
+
+The spread of the virus.
+
+The expansion of the universe.
+
+The contraction of the muscle.
+
+The beat of the heart.
+
+The breath of the sleeper.
+
+The tick of the second hand.
+
+The chime of the hour.
+
+The alarm ringing in the morning.
+
+The sunset over the ocean.
+
+The sunrise in the desert.
+
+The twilight hour.
+
+The dawn of the new age.
+
+The dusk of the day.
+
+The midnight hour.
+
+The noon break.
+
+The weekend getaway.
+
+The sabbatical year.
+
+The maternity leave.
+
+The summer vacation.
+
+The winter hibernation.
+
+The spring cleaning.
+
+The autumn harvest.
+
+The annual review.
+
+The monthly meeting.
+
+The weekly routine.
+
+The daily commute.
+
+The hourly wage.
+
+The minute wait.
+
+The second chance.
+
+The moment of truth.
+
+The eternity of silence.

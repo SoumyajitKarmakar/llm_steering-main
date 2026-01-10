@@ -37,8 +37,13 @@ from sklearn.kernel_ridge import KernelRidge
 from sklearn.compose import TransformedTargetRegressor
 from sklearn.model_selection import GridSearchCV
 
+from sklearn.metrics import mean_squared_error, r2_score
+
 import re
 import logging
+
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
 LLM = namedtuple('LLM', ['language_model', 'tokenizer', 'processor', 'name', 'model_type'])
@@ -315,6 +320,38 @@ def read_tuples_as_list(llm, antonyms, path='../directions_moods/'):
     return Xt, Yt
 
 
+# def read_tuples(llm, antonyms, path='../directions_moods/', path_2=None):
+#     hidden_layers = list(range(-1, -llm.language_model.config.num_hidden_layers, -1))
+
+#     Xt = {i: [] for i in hidden_layers}
+#     Yt = {i: [] for i in hidden_layers}
+
+#     for t in antonyms:
+#         try:
+#             dir1 = just_dirs(llm, t[0], path=path)
+#         except:
+#             if path_2 is not None:
+#                 dir1 = just_dirs(llm, t[0], path=path_2)
+#             else:
+#                 print(f"{t[0]} DNE in {path}!!")
+        
+#         try:
+#             dir2 = just_dirs(llm, t[1], path=path)
+#         except:
+#             if path_2 is not None:
+#                 dir2 = just_dirs(llm, t[1], path=path_2)
+#             else:
+#                 print(f"{t[1]} DNE in {path}!!")
+
+#         for k in Xt:
+#             Xt[k].append(dir1[k])
+#             Yt[k].append(dir2[k])
+
+#     X = {i: torch.cat(Xt[i]).to("cuda") for i in hidden_layers}
+#     Y = {i: torch.cat(Yt[i]).to("cuda") for i in hidden_layers}
+
+#     return X, Y
+
 def read_tuples(llm, antonyms, path='../directions_moods/'):
     hidden_layers = list(range(-1, -llm.language_model.config.num_hidden_layers, -1))
 
@@ -334,32 +371,102 @@ def read_tuples(llm, antonyms, path='../directions_moods/'):
 
     return X, Y
 
-def LRR_auto(X, Y):
-    # add args for cv, and alpha
+def read_tuples_with_category(llm, antonyms, path='../directions_moods/'):
+    hidden_layers = list(range(-1, -llm.language_model.config.num_hidden_layers, -1))
+
+    Xt = {i: [] for i in hidden_layers}
+    Yt = {i: [] for i in hidden_layers}
+
+    for t in antonyms:
+        dir1 = just_dirs(llm, t[0], path=path.format(t[2]))
+        dir2 = just_dirs(llm, t[1], path=path.format(t[2]))
+
+        for k in Xt:
+            Xt[k].append(dir1[k])
+            Yt[k].append(dir2[k])
+
+    X = {i: torch.cat(Xt[i]).to("cuda") for i in hidden_layers}
+    Y = {i: torch.cat(Yt[i]).to("cuda") for i in hidden_layers}
+
+    return X, Y
+
+def read_tuples_single_with_category(llm, words, path='../directions_moods/'):
+    hidden_layers = list(range(-1, -llm.language_model.config.num_hidden_layers, -1))
+
+    Xt = {i: [] for i in hidden_layers}
+
+    for t in words:
+        dir1 = just_dirs(llm, t[0], path=path.format(t[1]))
+
+        for k in Xt:
+            Xt[k].append(dir1[k])
+
+    X = {i: torch.cat(Xt[i]).to("cuda") for i in hidden_layers}
+
+    return X
+
+
+def read_to_list(file_name):
+    data = []
+    with open(file_name, "r") as f:
+        lines = f.readlines()
+        for line in lines:
+            data.append(line.strip())
+    
+    return data
+
+
+
+def LRR_auto(X, Y, print_error=False, alpha=10000.0):
+    # add args for cv
+
+    if isinstance(alpha, float):
+        print(f"Running with fixed alpha: {alpha}")
+        flag = 1
+    else:
+        alphas = 10.0 ** np.arange(-1, 6)  # log grid
+        print(f"Running with alpha: {alphas}")
+        flag = 0 # if alpha=None, find the best alpha
+
+    
     lrr_models = {}
     
-    d = X[-1].shape[1]
+    # d = X[-1].shape[1]
 
-    for i in X:
+    # for i in X:
+    for i in Y:
+        print("-"*50)
+
         x = X[i].cpu().numpy()
         y = Y[i].cpu().numpy()
 
-        # alphas = 10.0 ** np.arange(-1, 6)  # log grid
-        # reg_lrr = make_pipeline(StandardScaler(), RidgeCV(alphas=alphas, cv=10))
+        if flag == 1:
+            reg_lrr = make_pipeline(StandardScaler(), Ridge(alpha=alpha, solver='cholesky'))
 
-        reg_lrr = make_pipeline(StandardScaler(), Ridge(alpha=10000.0, solver='cholesky'))
+        elif flag == 0:
+            reg_lrr = make_pipeline(StandardScaler(), RidgeCV(alphas=alphas, cv=10))
         
         model_lrr = TransformedTargetRegressor(regressor=reg_lrr, transformer=StandardScaler())
 
         model_lrr.fit(x, y)
 
-        # best_alpha_lrr = model_lrr.regressor_.named_steps["ridgecv"].alpha_
-        # print(f"Layer: {i}, best lambda: {best_alpha_lrr}")
+        if flag == 0:
+            best_alpha_lrr = model_lrr.regressor_.named_steps["ridgecv"].alpha_
+            print(f"Layer: {i}, best lambda: {best_alpha_lrr}")
 
-        print(f"Layer {i} done.")
+        if print_error:
+            y_pred = model_lrr.predict(x)
+            mse = mean_squared_error(y, y_pred)
+            rmse = np.sqrt(mse)
+
+            r2 = r2_score(y, y_pred)
+
+            print(f"Layer {i}, Training RMSE: {rmse:.4f}, Training R2: {r2:.4f}")
 
         # xtx = x.T @ x
         # A = torch.linalg.solve(xtx + lambda_reg * torch.eye(d).to("cuda"), x.T @ y) # switch to more robust
+        
+        print(f"Layer {i} done.")
 
         lrr_models[i] = model_lrr
     
@@ -413,6 +520,28 @@ def apply_auto(direction, models, layers_control=None):
                 new_predicted[i] = torch.zeros_like(direction[i])
     
     return new_predicted
+
+def propagate_apply_auto(direction, models, hidden_layers, og_layers, recursive=True):
+    new_predicted = {}
+
+    if recursive:
+        for i in sorted(hidden_layers):
+            if i in og_layers:
+                new_predicted[i] = direction[i].to("cuda")
+            else:
+                new_predicted[i] = torch.tensor(models[i-1].predict(new_predicted[i-1].cpu().numpy())).to("cuda")
+
+    else:
+        for i in sorted(hidden_layers):
+            if i in og_layers:
+                new_predicted[i] = direction[i].to("cuda")
+            else:
+                # currently hardcoded offset
+                offset = 1
+                new_predicted[i] = torch.tensor(models[i-offset].predict(direction[i-offset].cpu().numpy())).to("cuda")
+
+    return new_predicted
+
 
 
 # def LRR(llm, antonyms, lambda_reg=0.1, d = 4096, path='../directions_moods/'):
@@ -585,7 +714,73 @@ def get_W_b(model_lrr):
 
     return W_eff, b_eff
 
+
+
+def force_ones_polar(models, thresh=0.1):
+    print(f"Runing with polar thresh={thresh}")
+    new_models = {}
+    biases = {}
+
+    for layer in tqdm(models):
+        weight, bias = get_W_b(models[layer])
+        eigen_w, eigen_v = eig(weight, check_finite=True)
+
+        magnitudes = np.abs(eigen_w)
+
+        eigen_w_new = np.zeros_like(eigen_w)
+
+        mask = magnitudes > thresh
+        eigen_w_new[mask] = eigen_w[mask] / magnitudes[mask]
+
+        new_matrix = eigen_v @ np.diag(eigen_w_new) @ inv(eigen_v)
+
+        if np.isrealobj(weight):
+            new_matrix = new_matrix.real
+
+        new_models[layer] = torch.tensor(new_matrix.real).to(device='cuda', dtype=torch.float32)
+        biases[layer] = torch.tensor(bias).to(device='cuda', dtype=torch.float32)
+
+    return new_models, biases
+
+
+def force_ones_fixed_polar(models, fixed=5):
+    print(f"Runing with polar fixed={fixed}")
+    new_models = {}
+    biases = {}
+
+    for layer in tqdm(models):
+        weight, bias = get_W_b(models[layer])
+        eigen_w, eigen_v = eig(weight, check_finite=True)
+
+        magnitudes = np.abs(eigen_w)
+
+        eigen_w_new = np.zeros_like(eigen_w, dtype=complex)
+
+        sort_idxs = np.argsort(magnitudes)
+
+        top_k_idxs = sort_idxs[-fixed:]
+
+        current_vals = eigen_w[top_k_idxs]
+        current_mags = magnitudes[top_k_idxs]
+
+        safe_mags = np.where(current_mags == 0, 1.0, current_mags)
+        eigen_w_new[top_k_idxs] = current_vals / safe_mags
+
+        new_matrix = eigen_v @ np.diag(eigen_w_new) @ inv(eigen_v)
+
+        if np.isrealobj(weight):
+            new_matrix = new_matrix.real
+
+        new_models[layer] = torch.tensor(new_matrix.real).to(device='cuda', dtype=torch.float32)
+        biases[layer] = torch.tensor(bias).to(device='cuda', dtype=torch.float32)
+
+    return new_models, biases
+
+
+
+
 def force_ones(models, thresh=0.1):
+    print(f"Runing with thresh={thresh}")
     new_models = {}
     biases = {}
 
@@ -602,9 +797,11 @@ def force_ones(models, thresh=0.1):
         eigen_w_new = [1.0 if i.real > thresh else -1.0 if i.real <-1*thresh else 0.0 for i in eigen_w]
 
         new_mo = eigen_v @ np.diag(eigen_w_new) @ inv(eigen_v)
+        
         for i in new_mo:
-            if np.max(np.abs(i.imag)) > 0.01:
-                print(f"Second Imaginary problem: {i}")
+            f = np.max(np.abs(i.imag))
+            if f > 0.01:
+                print(f"Second Imaginary problem: {f}")
 
         new_models[layer] = torch.tensor(new_mo.real).to(device='cuda', dtype=torch.float32)
         biases[layer] = torch.tensor(bias).to(device='cuda', dtype=torch.float32)
@@ -612,6 +809,7 @@ def force_ones(models, thresh=0.1):
     return new_models, biases
 
 def force_ones_fixed(models, fixed=5):
+    # just the real, both top and bottom
     print(f"Runing with fixed={fixed}")
     new_models = {}
     biases = {}
@@ -636,15 +834,48 @@ def force_ones_fixed(models, fixed=5):
         new_mo = eigen_v @ np.diag(eigen_w_new) @ inv(eigen_v)
 
         for i in new_mo:
-            if np.max(np.abs(i.imag)) > 0.01:
-                print(f"Second Imaginary problem: {i}")
+            f = np.max(np.abs(i.imag))
+            if f > 0.01:
+                print(f"Second Imaginary problem: {f}")
 
         new_models[layer] = torch.tensor(new_mo.real).to(device='cuda', dtype=torch.float32)
         biases[layer] = torch.tensor(bias).to(device='cuda', dtype=torch.float32)
 
     return new_models, biases
 
+def force_ones_fixed_uni(models, fixed=5):
+    # just the real, only the top.
+    print(f"Runing uni with fixed={fixed}")
+    new_models = {}
+    biases = {}
 
+    for layer in tqdm(models):
+        weight, bias = get_W_b(models[layer])
+
+        eigen_w, eigen_v = eig(weight, check_finite=True)
+
+        for i in eigen_w:
+            if np.abs(i.imag) > 0.01:
+                print(f"First Imaginary problem: {i}")
+
+        eigen_w_new = np.zeros_like(eigen_w, dtype=float)
+
+        sort_idxs = np.argsort(eigen_w.real)
+
+        eigen_w_new[sort_idxs[-fixed:]] = 1.0
+        # eigen_w_new[sort_idxs[:fixed]] = -1.0
+
+        new_mo = eigen_v @ np.diag(eigen_w_new) @ inv(eigen_v)
+
+        for i in new_mo:
+            f = np.max(np.abs(i.imag))
+            if f > 0.01:
+                print(f"Second Imaginary problem: {f}")
+
+        new_models[layer] = torch.tensor(new_mo.real).to(device='cuda', dtype=torch.float32)
+        biases[layer] = torch.tensor(bias).to(device='cuda', dtype=torch.float32)
+
+    return new_models, biases
 
 
 

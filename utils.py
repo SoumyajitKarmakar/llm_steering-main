@@ -732,6 +732,90 @@ def pca_mood_dataset_qwen(llm, mood, think=False, seed=0):
     return formatted_data
 
 
+def g_pca_mood_dataset(llm, mood, seed=0):
+    print("Doing german.")
+    
+    tokenizer = llm.tokenizer
+    concept_type = mood
+    data_dir = 'data/g_general_statements'
+    random.seed(0)
+
+    user_str = 'Nimm eine {concept_type} Stimmung an. Was sind deine Gedanken zu der folgenden Aussage? \nAussage: {statement}'
+    default_str = 'Was sind deine Gedanken zu der folgenden Aussage? \nAussage: {statement}'
+
+    with open(os.path.join(data_dir, f"class_0.txt"), encoding="utf-8") as f:
+            raw_data = f.readlines()
+    with open(os.path.join(data_dir, f"class_1.txt"), encoding="utf-8") as f:
+            raw_data_2 = f.readlines()
+
+
+    csp_data = [user_str.format(concept_type=mood, statement=s) for s in raw_data]
+    ncsp_data = [default_str.format(statement=s) for s in raw_data_2]
+
+    llm_type = llm.model_type
+
+    for idx, s in enumerate(csp_data):
+        if llm_type == LLMType.TEXT:
+            chat = [
+            {
+                "role": "user", 
+                "content": s
+            },
+            ]
+        elif llm_type == LLMType.GEMMA_TEXT:
+            chat = [
+            {
+                "role": "user", 
+                "content": [{"type": "text", "text": s},]
+            },
+            ]
+
+        csp_data[idx] = tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True).strip()
+    
+    for idx, s in enumerate(ncsp_data):
+        if llm_type == LLMType.TEXT:
+            chat = [
+            {
+                "role": "user", 
+                "content": s
+            },
+            ]
+        elif llm_type == LLMType.GEMMA_TEXT:
+            chat = [
+            {
+                "role": "user", 
+                "content": [{"type": "text", "text": s},]
+            },
+            ]
+
+        ncsp_data[idx] = tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True).strip()
+
+    print(csp_data[0], ncsp_data[0])
+    formatted_data = {}
+
+    csp_labels = [1.] * len(csp_data)
+    ncsp_labels = [0.] * len(ncsp_data)
+    data = []
+    labels = []
+    for i in range(len(csp_data)):
+        data.append(csp_data[i])
+        data.append(ncsp_data[i])
+        labels.append(csp_labels[i])
+        labels.append(ncsp_labels[i])
+
+    train_data = data    
+    train_labels = labels
+    print("train", len(train_data))
+
+    formatted_data[concept_type] = {
+        'train': {'inputs': train_data, 'labels': train_labels},
+    }
+    f.close()
+
+    return formatted_data
+
+
+
 def pca_mood_dataset(llm, mood, seed=0):
     tokenizer = llm.tokenizer
     concept_type = mood

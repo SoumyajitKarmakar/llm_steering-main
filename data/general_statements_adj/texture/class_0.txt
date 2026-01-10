@@ -1,0 +1,200 @@
+The surface of the unknown object.
+The fabric draped over the furniture.
+The liquid inside the container.
+The air inside the abandoned room.
+The ground beneath your feet.
+The substance coating the walls.
+The meal served on the plate.
+The sound emanating from the machine.
+The light filtering through the window.
+The atmosphere in the crowded hall.
+The handle of the door.
+The skin of the strange fruit.
+The material of the jacket.
+The water in the lake.
+The stone picked up from the riverbed.
+The beverage in the glass.
+The wind blowing against your face.
+The music playing in the background.
+The object found in the sand.
+The texture of the paper.
+The smell rising from the box.
+The interior of the car.
+The upholstery on the chair.
+The sand on the beach.
+The mud on the path.
+The metal railing on the stairs.
+The blanket on the bed.
+The bark of the tree.
+The foam on top of the liquid.
+The sauce covering the food.
+The glow coming from the screen.
+The noise of the city street.
+The temperature of the bathwater.
+The feeling of the grass.
+The crust of the bread.
+The gel in the jar.
+The powder in the bowl.
+The floor of the workshop.
+The leather of the wallet.
+The fur of the animal.
+The petals of the flower.
+The shell of the egg.
+The mist hanging in the air.
+The vibration of the floor.
+The glare of the sun.
+The darkness of the tunnel.
+The taste of the candy.
+The scent of the perfume.
+The soap in the shower.
+The condensation on the glass.
+The rust on the gate.
+The paint on the canvas.
+The moss growing on the rock.
+The carpet in the living room.
+The dough on the counter.
+The slime on the rocks.
+The grease on the engine part.
+The dust on the shelf.
+The ice on the windshield.
+The steam rising from the pot.
+The wool of the sweater.
+The silk of the scarf.
+The concrete of the sidewalk.
+The wood of the table.
+The plastic of the toy.
+The rubber of the tire.
+The ceramic of the mug.
+The glass of the mirror.
+The brick of the wall.
+The wax of the candle.
+The feather found on the ground.
+The leaf falling from the branch.
+The syrup on the pancakes.
+The jelly in the donut.
+The broth of the soup.
+The cream in the coffee.
+The fizz of the soda.
+The crunch of the apple.
+The hum of the refrigerator.
+The tick of the clock.
+The roar of the engine.
+The whisper of the wind.
+The flash of the camera.
+The dimness of the basement.
+The chill of the winter air.
+The heat of the summer day.
+The humidity of the jungle.
+The dryness of the desert.
+The stickiness of the tape.
+The slipperiness of the floor.
+The roughness of the sandpaper.
+The smoothness of the marble.
+The sharpness of the edge.
+The dullness of the blade.
+The hardness of the diamond.
+The softness of the pillow.
+The bitterness of the medicine.
+The sweetness of the dessert.
+The spiciness of the pepper.
+The sourness of the lemon.
+The gravel on the driveway.
+The silk of the tie.
+The breeze off the ocean.
+The taste of the dark chocolate.
+The sound of the siren.
+The light of the full moon.
+The surface of the drum.
+The fabric of the jeans.
+The water in the hot tub.
+The air in the attic.
+The handle of the tennis racket.
+The skin of the apple.
+The smell of the campfire.
+The noise of the fan.
+The glow of the neon sign.
+The mud on the riverbank.
+The frosting on the cupcake.
+The leather of the saddle.
+The fur of the dog.
+The petals of the tulip.
+The pulp of the grapefruit.
+The fizz of the soda pop.
+The crunch of the cracker.
+The hum of the generator.
+The tick of the metronome.
+The roar of the crowd.
+The whisper of the leaves.
+The flash of the strobe light.
+The dimness of the cave.
+The chill of the metal.
+The heat of the iron.
+The humidity of the greenhouse.
+The dryness of the cracker.
+The stickiness of the glue.
+The slipperiness of the ice patch.
+The roughness of the stone.
+The smoothness of the glass.
+The sharpness of the knife.
+The dullness of the pencil.
+The hardness of the concrete.
+The softness of the down feather.
+The bitterness of the greens.
+The sweetness of the nectar.
+The spiciness of the curry.
+The sourness of the yogurt.
+The saltiness of the pretzel.
+The scent of the lavender.
+The odor of the exhaust.
+The fragrance of the lilies.
+The stink of the stagnant water.
+The aroma of the roast.
+The stench of the decay.
+The smoke from the chimney.
+The steam from the shower.
+The mist over the meadow.
+The fog on the highway.
+The haze of the afternoon.
+The glare of the headlights.
+The shadow under the tree.
+The darkness of the theater.
+The brightness of the screen.
+The color of the paint.
+The pattern of the wallpaper.
+The texture of the carpet.
+The grain of the sandpaper.
+The weave of the basket.
+The nap of the rug.
+The pile of the fabric.
+The feel of the velvet.
+The consistency of the mud.
+The density of the fog.
+The weight of the stone.
+The pressure of the water.
+The vibration of the engine.
+The shock of the static electricity.
+The sting of the alcohol.
+The ache of the bruise.
+The relief of the massage.
+The comfort of the sofa.
+The agony of the headache.
+The pleasure of the warm sun.
+The tickle of the grass.
+The itch of the mosquito bite.
+The pain of the splinter.
+The numbness of the fingers.
+The tingling of the foot.
+The sensation of floating.
+The surface of the chalkboard.
+The liquid in the soup bowl.
+The air in the bakery.
+The sound of the bell.
+The light in the hallway.
+The taste of the tea.
+The feeling of the steering wheel.
+The railing on the deck.
+The mud on the boots.
+The interior of the tent.
+The breeze through the window.
+The keys in the pocket.
+The screen of the laptop.

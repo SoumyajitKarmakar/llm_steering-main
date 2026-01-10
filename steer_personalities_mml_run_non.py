@@ -12,6 +12,7 @@ import os
 # from janus.utils.io import load_pil_images
 # from generation_utils import extract_image
 import utils
+import utils_concepts
 
 SEED = 0
 torch.manual_seed(SEED)
@@ -89,7 +90,6 @@ def compute_save_directions(llm, dataset, concept, control_method='rfm', path='d
         print(f"'{os.path.join(path, f'{control_method}_{concept}_{llm.name}.pkl')}' exists, skipping it.")
         return
 
-    
     concept_types = [concept]
     for concept_type in concept_types:
         controller = NeuralController(
@@ -118,39 +118,31 @@ def read_file(fname, lower=True):
     return concepts
 
 def main():
-
+    # /scratch/bbjr/skarmakar/neuinv/directions_dump
+    
     torch.backends.cudnn.benchmark = True        
     torch.backends.cuda.matmul.allow_tf32 = True        
 
-    # fnames = ['data/fears/fears.txt',
-    #           'data/personalities/personalities.txt',
-    #           'data/moods/moods.txt',
-    #           'data/places/places.txt',
-    #           'data/personas/personas.txt',]
-    # lowers = [True, True, True, False, False]
-    # dataset_labels = ['fears', 'personalities', 'moods', 'places', 'personas']
-
-    # # # -------------------------------------------------------------------------------
-    # fnames = ['data/moods/moods_antonyms.txt',]
+    # fnames = ['data/adjectives/social.txt',]
     # lowers = [True,]
-    # dataset_labels = ['moods',]
-    # save_path = 'directions_moods/'
-    # save_path = 'all_gitignore/directions_single_og/'
+    # dataset_labels = ['social',]
+    # # save_path = 'all_gitignore/directions_single_new_statement_new_prompt/{}/'
+    # # save_path = 'all_gitignore/directions_single_new_statement_old_prompt/{}/'
+    # # save_path = 'all_gitignore/directions_single_old_statement_new_prompt/{}/'
+    # save_path = 'all_gitignore/directions_single_old_statement_old_prompt/{}/'
 
     # -------------------------------------------------------------------------------
-    # # fnames = ['data/moods/moods_intensity.txt',]
-    # fnames = ['data/moods/moods_intensity_leftover.txt',]
-    # lowers = [True,]
-    # dataset_labels = ['moods',]
-    # save_path = 'all_gitignore/directions_moods_intensity_llama/'
-
-    # # -------------------------------------------------------------------------------
-    # german
-    fnames = ['data/g_moods/moods_antonyms.txt',]
-    lowers = [True,]
-    dataset_labels = ['g_moods',]
-    # save_path = 'directions_moods/'
-    save_path = 'all_gitignore/directions_moods_plus_llama_german/'
+    fnames = ['data/adjectives/complexity.txt',
+            'data/adjectives/logic.txt',
+            'data/adjectives/physical.txt',
+            'data/adjectives/social.txt',
+            'data/adjectives/state.txt',
+            'data/adjectives/texture.txt',
+            'data/adjectives/time.txt',]
+    lowers = [True, True, True, True, True, True, True, ]
+    dataset_labels = ['complexity', 'logic', 'physical', 'social', 'state', 'texture', 'time']
+    # save_path = 'all_gitignore/directions_adjectives_llama/{}/'
+    save_path = 'all_gitignore/directions_adjectives_llama/{}/'
 
 
     model_type = 'llama'
@@ -162,48 +154,37 @@ def main():
     METHOD = 'rfm'
 
     for f_idx, fname in enumerate(fnames):
-        # if f_idx != 1:
-        #     continue        
-        # if f_idx != 1 and f_idx != 2 and f_idx != 3:
-        #     continue
-        # if f_idx != 4: 
-        #     continue
-
-        # if f_idx <= 1: 
-        #     continue
         concepts = read_file(fname, lower=lowers[f_idx])
         # --------------------------
         # concepts = ["cheerful", "gloomy",]
         # --------------------------
-        # if f_idx == 2: 
-        #     start_idx = concepts.index('tense')
         dataset_label = dataset_labels[f_idx]
+
+        folder_path = save_path.format(dataset_label)
+        os.makedirs(folder_path, exist_ok=True)
+
         for concept_idx, concept in enumerate(tqdm(concepts)):
-            # if concept != 'bad breath':
-            #     continue
-            # if concept != 'dogs' and concept != 'chickens' and concept != 'beards':
-            #     continue
-            # if concept != 'Angela Merkel' and concept != 'Avicenna' and concept != 'Richard Feynman':
-            #     continue
-
-            # if f_idx == 2 and concept_idx < start_idx:
-            #     continue
             print(f"=============================================CONCEPT={concept}=============================================")
-            
-            if dataset_label == 'fears':
-                dataset = utils.pca_fears_dataset(llm, concept)
-            elif dataset_label == 'personalities':
-                dataset = utils.pca_personalities_dataset(llm, concept)
-            elif dataset_label == 'personas':
-                dataset = utils.pca_persona_dataset(llm, concept)
-            elif dataset_label == 'moods':
-                dataset = utils.pca_mood_dataset(llm, concept)
-            elif dataset_label == 'g_moods':
-                dataset = utils.g_pca_mood_dataset(llm, concept) # german
-            elif dataset_label == 'places':
-                dataset = utils.pca_places_dataset(llm, concept)
 
-            compute_save_directions(llm, dataset, concept, control_method=METHOD, path=save_path)
+            dataset = utils_concepts.pca_adjective_dataset(llm, concept, dataset_label)
+            
+            # if dataset_label == 'complexity':
+            #     dataset = utils_concepts.pca_fears_dataset(llm, concept)
+            # elif dataset_label == 'logic':
+            #     dataset = utils_concepts.pca_personalities_dataset(llm, concept)
+            # elif dataset_label == 'physical':
+            #     dataset = utils_concepts.pca_persona_dataset(llm, concept)
+            # elif dataset_label == 'social':
+            #     dataset = utils_concepts.pca_mood_dataset(llm, concept)
+            # elif dataset_label == 'state':
+            #     dataset = utils_concepts.pca_concept_dataset(llm, concept)
+            # elif dataset_label == 'texture':
+            #     dataset = utils_concepts.pca_places_dataset(llm, concept)
+            # elif dataset_label == 'time':
+            #     dataset = utils_concepts.pca_places_dataset(llm, concept)
+
+
+            compute_save_directions(llm, dataset, concept, control_method=METHOD, path=folder_path)
             # del llm
             del dataset
             torch.cuda.empty_cache()

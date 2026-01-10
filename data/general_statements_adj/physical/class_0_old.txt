@@ -1,0 +1,399 @@
+The mysterious object sitting in the center of the laboratory.
+
+The vehicle approaching from the horizon.
+
+The structure that was recently built downtown.
+
+The river flowing through the valley.
+
+The strange animal discovered in the rainforest.
+
+The device resting on the workbench.
+
+The rock formation near the cliff edge.
+
+The unknown substance inside the glass container.
+
+The piece of furniture in the corner of the room.
+
+The sculpture displayed in the art gallery.
+
+The tunnel leading into the mountain.
+
+The meteor streaking across the sky.
+
+The ancient tree standing in the field.
+
+The machinery operating in the background.
+
+The wall separating the two properties.
+
+The cloud formation overhead.
+
+The pathway winding through the garden.
+
+The box delivered to the front porch.
+
+The fabric draped over the chair.
+
+The planet visible through the telescope.
+
+The crystal extracted from the mine.
+
+The bridge connecting the two islands.
+
+The wave approaching the shore.
+
+The metal beam supporting the roof.
+
+The insect crawling on the leaf.
+
+The shadow cast by the building.
+
+The engine mounted on the test stand.
+
+The fragment of debris on the ground.
+
+The tower visible in the distance.
+
+The liquid pouring from the bottle.
+
+The gap between the fence posts.
+
+The instrument used for the measurement.
+
+The stone held in the palm of a hand.
+
+The vessel floating on the water.
+
+The barrier blocking the road.
+
+The cavern entrance hidden by vines.
+
+The sphere resting on the pedestal.
+
+The load being lifted by the crane.
+
+The corridor stretching down the hallway.
+
+The specimen under the microscope.
+
+The glacier moving slowly down the slope.
+
+The projectile launched into the air.
+
+The monument in the city square.
+
+The island located off the coast.
+
+The organism growing in the petri dish.
+
+The pipe running along the ceiling.
+
+The staircase spiraling upward.
+
+The weapon displayed in the museum case.
+
+The gear mechanism inside the clock.
+
+The landscape stretching out before you.
+
+The pillar supporting the entrance.
+
+The suitcase sitting by the door.
+
+The fish swimming in the tank.
+
+The wire connecting the two components.
+
+The hole dug in the backyard.
+
+The rain falling against the window.
+
+The block of ice on the table.
+
+The jewelry worn around the neck.
+
+The sand dune in the desert.
+
+The package wrapped in brown paper.
+
+The satellite orbiting the earth.
+
+The rope tied to the dock.
+
+The flame burning in the fireplace.
+
+The breeze blowing through the window.
+
+The wheel attached to the axle.
+
+The geometric shape drawn on the paper.
+
+The tool hanging on the wall.
+
+The mineral sample found in the soil.
+
+The canyon carved by the river.
+
+The robot moving across the floor.
+
+The blanket folded on the bed.
+
+The sword hanging above the mantle.
+
+The shell found on the beach.
+
+The container stored in the cargo hold.
+
+The road stretching into the distance.
+
+The dust settling on the surface.
+
+The plant growing in the pot.
+
+The figure standing in the doorway.
+
+The ship sailing on the open sea.
+
+The gate at the entrance of the park.
+
+The balloon floating in the air.
+
+The screen mounted on the wall.
+
+The cable buried underground.
+
+The platform suspended in the air.
+
+The rod inserted into the mechanism.
+
+The dome covering the stadium.
+
+The slab of concrete on the construction site.
+
+The bird flying overhead.
+
+The crystal vase on the mantelpiece.
+
+The pile of leaves in the yard.
+
+The bar of metal in the forge.
+
+The pond in the middle of the woods.
+
+The artifact excavated from the ruins.
+
+The curtain hanging over the stage.
+
+The foam floating on the water's surface.
+
+The boulder resting on the hill.
+
+The chain linking the posts.
+
+The vent releasing steam.
+
+The tower of books on the desk.
+
+The crack in the pavement.
+
+The coin spinning on the table.
+
+The gap between the floorboards.
+
+The hose coiled in the garden.
+
+The fabric of the curtain.
+
+The monitor on the computer desk.
+
+The statue in the park center.
+
+The stream of water from the faucet.
+
+The basket sitting on the counter.
+
+The tire on the truck.
+
+The valley between the two mountains.
+
+The ladder leaning against the wall.
+
+The crystal chandelier.
+
+The rock sitting at the bottom of the aquarium.
+
+The piece of paper on the floor.
+
+The corridor in the hospital.
+
+The cable connecting the speakers.
+
+The mound of dirt in the construction zone.
+
+The lens of the camera.
+
+The bottle of perfume.
+
+The ship docked at the harbor.
+
+The arch over the doorway.
+
+The leaf floating in the puddle.
+
+The metal grate on the street.
+
+The moon visible in the night sky.
+
+The ribbon tied around the gift.
+
+The cavern deep underground.
+
+The stack of firewood.
+
+The puddle of oil on the garage floor.
+
+The billboard on the side of the road.
+
+The fence post.
+
+The cloud passing over the sun.
+
+The gear shift in the car.
+
+The vase of flowers.
+
+The tunnel used by the subway.
+
+The brick in the wall.
+
+The suitcase in the trunk.
+
+The branch lying on the path.
+
+The silhouette of the city skyline.
+
+The cup sitting on the saucer.
+
+The pool of water in the rock.
+
+The wire holding the picture frame.
+
+The tower transmitting signals.
+
+The boulder blocking the trail.
+
+The island in the stream.
+
+The plank of the wooden bridge.
+
+The window in the attic.
+
+The rug in the hallway.
+
+The pipe under the sink.
+
+The jar of honey.
+
+The beam of the flashlight.
+
+The gap in the hedge.
+
+The stone in the ring.
+
+The bag of groceries.
+
+The flag on the pole.
+
+The ledge of the cliff.
+
+The debris from the demolition.
+
+The tool in the toolbox.
+
+The staircase in the library.
+
+The shell on the sand.
+
+The crystal on the necklace.
+
+The beam in the barn.
+
+The space between the buildings.
+
+The satellite in the sky.
+
+The fish in the pond.
+
+The layer of frost on the glass.
+
+The sheet of metal.
+
+The path through the snow.
+
+The object in the distance.
+
+The shadow of the person.
+
+The container of water.
+
+The branch of the tree.
+
+The gear in the machine.
+
+The dome of the building.
+
+The ice on the lake.
+
+The parcel in the mail.
+
+The line on the paper.
+
+The pit in the ground.
+
+The balloon at the party.
+
+The frame of the glasses.
+
+The stone on the ground.
+
+The mesh of the screen.
+
+The log in the fireplace.
+
+The vent in the wall.
+
+The platform of the stage.
+
+The shard of pottery.
+
+The mist in the valley.
+
+The pillar of the bridge.
+
+The book on the shelf.
+
+The tile on the roof.
+
+The container in the pantry.
+
+The hammer on the table.
+
+The cliff by the ocean.
+
+The tent at the campsite.
+
+The screen of the television.
+
+The ring on the finger.
+
+The plank in the floor.
+
+The shadow on the wall.
+
+The crater in the ground.
+
+The tube of toothpaste.
+
+The sail of the sailboat.

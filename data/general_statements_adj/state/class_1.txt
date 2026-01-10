@@ -1,0 +1,200 @@
+The bandwidth of the network.
+The seat on the bus.
+The parking spot in the lot.
+The calendar for the week.
+The position of the switch.
+The hygiene of the kitchen counter.
+The integrity of the hull.
+The freshness of the bread.
+The charge of the battery.
+The availability of the doctor.
+The signal on the phone.
+The latch on the window.
+The valve on the pipe.
+The cursor on the screen.
+The flame on the candle.
+The portal to the next level.
+The encryption on the file.
+The access to the building.
+The consciousness of the patient.
+The ripeness of the fruit.
+The vacancy at the motel.
+The connection of the Bluetooth device.
+The safety of the neighborhood.
+The cleanliness of the water.
+The stability of the structure.
+The registration of the vehicle.
+The license of the software.
+The subscription to the service.
+The balance of the bank account.
+The occupancy of the restroom.
+The focus of the camera lens.
+The alignment of the wheels.
+The pressure in the tires.
+The temperature of the oven.
+The humidity of the room.
+The clarity of the sky.
+The visibility on the road.
+The volume of the radio.
+The brightness of the screen.
+The sharpness of the knife.
+The tension of the string.
+The elasticity of the band.
+The porosity of the material.
+The solubility of the substance.
+The conductivity of the wire.
+The magnetism of the metal.
+The radioactivity of the isotope.
+The toxicity of the chemical.
+The flammability of the fabric.
+The expiration date of the milk.
+The validity of the passport.
+The warranty on the appliance.
+The authenticity of the signature.
+The eligibility for the grant.
+The liability of the company.
+The guilt of the defendant.
+The sobriety of the driver.
+The fertility of the soil.
+The dormancy of the volcano.
+The hibernation of the bear.
+The paralysis of the limb.
+The blindness of the eye.
+The deafness of the ear.
+The mute button on the remote.
+The pause button on the player.
+The record button on the camera.
+The power button on the console.
+The reset button on the router.
+The eject button on the drive.
+The trigger of the trap.
+The fuse of the dynamite.
+The safety catch on the weapon.
+The pin in the grenade.
+The cork in the bottle.
+The cap on the pen.
+The lid on the pot.
+The stopper in the sink.
+The plug in the socket.
+The jack in the port.
+The card in the slot.
+The coin in the machine.
+The bill in the validator.
+The ticket in the turnstile.
+The key in the ignition.
+The password in the field.
+The code in the keypad.
+The fingerprint on the scanner.
+The face in the recognition software.
+The voice in the microphone.
+The motion in the sensor.
+The light in the indicator.
+The siren on the ambulance.
+The bell on the door.
+The buzzer on the game show.
+The whistle of the referee.
+The flag on the pole.
+The sign in the window.
+The label on the jar.
+The tag on the clothes.
+The sticker on the bumper.
+The zipper on the backpack.
+The velcro on the shoe.
+The buttons on the remote control.
+The touchscreen of the kiosk.
+The sensor on the automatic door.
+The valve on the propane tank.
+The lid of the trash can.
+The cap of the marker.
+The seal on the envelope.
+The latch on the gate.
+The bolt on the door.
+The chain on the fence.
+The lock on the diary.
+The code for the alarm.
+The password for the wifi.
+The signal of the radio station.
+The broadcast of the television show.
+The stream of the video.
+The download of the file.
+The upload of the photo.
+The charge of the laptop.
+The power of the generator.
+The fuel in the tank.
+The water in the reservoir.
+The air in the tire.
+The pressure in the cabin.
+The temperature of the coffee.
+The ice in the cooler.
+The fire in the pit.
+The light of the bulb.
+The sound of the speaker.
+The vibration of the controller.
+The motion of the fan.
+The speed of the car.
+The direction of the wind.
+The height of the tide.
+The depth of the pool.
+The width of the gap.
+The length of the rope.
+The weight of the luggage.
+The size of the crowd.
+The color of the traffic light.
+The pattern of the wallpaper.
+The texture of the fabric.
+The smell of the room.
+The taste of the food.
+The feeling of the surface.
+The look of the design.
+The style of the dress.
+The fit of the shoes.
+The comfort of the chair.
+The cleanliness of the floor.
+The order of the books.
+The chaos of the desk.
+The peace of the garden.
+The noise of the street.
+The silence of the library.
+The brightness of the sun.
+The darkness of the cave.
+The shadow of the tree.
+The reflection in the mirror.
+The image on the screen.
+The focus of the lens.
+The zoom of the camera.
+The angle of the shot.
+The perspective of the drawing.
+The composition of the photo.
+The quality of the recording.
+The volume of the voice.
+The tone of the message.
+The content of the letter.
+The subject of the email.
+The title of the book.
+The name of the file.
+The label of the folder.
+The tag of the image.
+The link of the website.
+The address of the page.
+The status of the user.
+The profile of the member.
+The account of the customer.
+The subscription of the magazine.
+The membership of the gym.
+The ticket of the passenger.
+The pass of the visitor.
+The badge of the employee.
+The ID of the student.
+The license of the driver.
+The permit of the builder.
+The visa of the traveler.
+The passport of the citizen.
+The certificate of the graduate.
+The diploma of the scholar.
+The degree of the doctor.
+The rank of the officer.
+The title of the noble.
+The position of the leader.
+The role of the actor.
+The character of the player.
+The level of the game.

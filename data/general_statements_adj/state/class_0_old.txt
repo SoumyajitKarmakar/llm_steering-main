@@ -1,0 +1,399 @@
+The front door of the house.
+
+The operating system of the computer.
+
+The animal found on the roadside.
+
+The window in the bedroom.
+
+The engine of the car.
+
+The lights in the hallway.
+
+The bottle of water.
+
+The gate to the garden.
+
+The battery in the remote.
+
+The connection to the server.
+
+The seat in the theater.
+
+The plant in the pot.
+
+The box in the attic.
+
+The screen of the phone.
+
+The road leading to the mountain.
+
+The wound on the arm.
+
+The file on the desk.
+
+The lock on the safe.
+
+The shop on the corner.
+
+The switch on the wall.
+
+The microphone on the stage.
+
+The relationship between the two countries.
+
+The contract for the deal.
+
+The food in the refrigerator.
+
+The ticket for the concert.
+
+The position at the company.
+
+The alarm system.
+
+The ice on the lake.
+
+The volcano on the island.
+
+The path through the woods.
+
+The flower in the vase.
+
+The account on the website.
+
+The trash can in the kitchen.
+
+The toy on the floor.
+
+The bridge crossing the river.
+
+The elevator in the building.
+
+The faucet in the bathroom.
+
+The fire in the fireplace.
+
+The book on the shelf.
+
+The clothes in the hamper.
+
+The patient in the hospital bed.
+
+The software application.
+
+The document on the screen.
+
+The traffic light.
+
+The package on the porch.
+
+The bomb in the movie scene.
+
+The virus sample in the lab.
+
+The membership to the club.
+
+The deal offered by the salesman.
+
+The room in the hotel.
+
+The slot machine in the casino.
+
+The table at the restaurant.
+
+The website link.
+
+The circuit breaker.
+
+The vase on the mantel.
+
+The bone in the leg.
+
+The promise made to the friend.
+
+The border between the nations.
+
+The cage at the zoo.
+
+The microphone during the interview.
+
+The camera recording the event.
+
+The mind of the sleeping person.
+
+The eyes of the observer.
+
+The wallet found on the street.
+
+The gun in the holster.
+
+The letter in the envelope.
+
+The answer to the question.
+
+The vote in the election.
+
+The stock market for the day.
+
+The tide at the beach.
+
+The moon in the sky.
+
+The flower bud in spring.
+
+The paint on the wall.
+
+The water in the pipe.
+
+The gas tank of the vehicle.
+
+The battery of the flashlight.
+
+The seatbelt in the car.
+
+The zipper on the jacket.
+
+The laces on the shoes.
+
+The knot in the rope.
+
+The chain on the bike.
+
+The seal on the jar.
+
+The lid of the container.
+
+The contents of the email.
+
+The status of the project.
+
+The mood of the crowd.
+
+The weather outside.
+
+The surface of the table.
+
+The filter in the machine.
+
+The drain in the sink.
+
+The vent in the ceiling.
+
+The crack in the dam.
+
+The fuse in the box.
+
+The bulb in the lamp.
+
+The key in the lock.
+
+The handle of the door.
+
+The button on the shirt.
+
+The clasp of the necklace.
+
+The cover of the book.
+
+The screen of the television.
+
+The connection to the Wi-Fi network.
+
+The battery level of the electric car.
+
+The status of the flight departure.
+
+The readiness of the meal.
+
+The emptiness of the glass.
+
+The darkness of the room.
+
+The silence of the forest.
+
+The stillness of the water.
+
+The chaos of the intersection.
+
+The peace of the countryside.
+
+The safety of the harness.
+
+The danger of the cliff edge.
+
+The toxicity of the mushroom.
+
+The sterility of the surgical tool.
+
+The purity of the gold.
+
+The corruption of the file.
+
+The encryption of the message.
+
+The visibility of the stars.
+
+The accessibility of the ramp.
+
+The vacancy of the rental unit.
+
+The occupancy of the restroom stall.
+
+The availability of the customer service agent.
+
+The validity of the coupon.
+
+The expiration of the contract.
+
+The freshness of the vegetables.
+
+The ripeness of the avocado.
+
+The warmth of the blanket.
+
+The coldness of the drink.
+
+The wetness of the paint.
+
+The dryness of the desert sand.
+
+The hardness of the cement.
+
+The softness of the pillow.
+
+The smoothness of the polished stone.
+
+The roughness of the sandpaper.
+
+The sharpness of the razor.
+
+The dullness of the scissors.
+
+The brightness of the flashlight beam.
+
+The dimness of the night light.
+
+The loudness of the music.
+
+The quietness of the library.
+
+The clarity of the recording.
+
+The fuzziness of the image.
+
+The stability of the ladder.
+
+The wobbliness of the table leg.
+
+The tightness of the screw.
+
+The looseness of the bolt.
+
+The straightness of the line.
+
+The curvature of the road.
+
+The complexity of the puzzle.
+
+The simplicity of the instructions.
+
+The difficulty of the test.
+
+The ease of the task.
+
+The heaviness of the box.
+
+The lightness of the feather.
+
+The fullness of the moon.
+
+The emptiness of the wallet.
+
+The richness of the soil.
+
+The poverty of the region.
+
+The health of the patient.
+
+The sickness of the animal.
+
+The life of the battery.
+
+The death of the star.
+
+The birth of the idea.
+
+The end of the movie.
+
+The beginning of the race.
+
+The finish line of the marathon.
+
+The start of the engine.
+
+The stop sign at the corner.
+
+The pause in the conversation.
+
+The continuation of the series.
+
+The interruption of the broadcast.
+
+The connection of the cables.
+
+The disconnection of the call.
+
+The attachment of the file.
+
+The detachment of the trailer.
+
+The inclusion of the battery.
+
+The exclusion of the fee.
+
+The presence of the witness.
+
+The absence of the teacher.
+
+The arrival of the package.
+
+The departure of the train.
+
+The entry to the club.
+
+The exit from the building.
+
+The opening of the store.
+
+The closing of the deal.
+
+The lock on the bicycle.
+
+The unlock code for the phone.
+
+The fastening of the seatbelt.
+
+The unbuckling of the strap.
+
+The tying of the shoelaces.
+
+The untying of the knot.
+
+The wrapping of the gift.
+
+The unwrapping of the present.
+
+The covering of the pool.
+
+The uncovering of the artifact.
+
+The hiding of the treasure.
+
+The finding of the lost key.
+
+The losing of the game.
+
+The winning of the lottery.
+
+The tie in the match.

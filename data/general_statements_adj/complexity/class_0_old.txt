@@ -1,0 +1,399 @@
+The rules of the card game.
+
+The process of filing taxes.
+
+The mechanism of a mechanical watch.
+
+The theory of relativity.
+
+The instructions for assembling the furniture.
+
+The plot of the novel.
+
+The user interface of the software.
+
+The recipe for the souffle.
+
+The strategy for winning the match.
+
+The concept of blockchain technology.
+
+The legal contract.
+
+The map of the subway system.
+
+The solution to the puzzle.
+
+The grammar of the foreign language.
+
+The dynamics of the social group.
+
+The structure of the molecule.
+
+The history of the conflict.
+
+The algorithm for the search engine.
+
+The procedure for the medical test.
+
+The layout of the city streets.
+
+The method for brewing coffee.
+
+The etiquette for the formal dinner.
+
+The physics of flight.
+
+The wiring of the electrical panel.
+
+The emotions involved in the relationship.
+
+The steps to solve the math equation.
+
+The biological ecosystem of the forest.
+
+The regulations for building a house.
+
+The code written for the application.
+
+The philosophy of existentialism.
+
+The technique for playing the violin.
+
+The process of photosynthesis.
+
+The instructions for the board game.
+
+The negotiation of the trade deal.
+
+The design of the architecture.
+
+The maintenance of the car engine.
+
+The economic policy of the country.
+
+The route to the destination.
+
+The relationship between the two characters.
+
+The installation of the operating system.
+
+The logistics of the supply chain.
+
+The plot twist in the movie.
+
+The structure of the poem.
+
+The controls of the airplane cockpit.
+
+The chemistry of baking.
+
+The hierarchy of the corporation.
+
+The tax code.
+
+The manual for the new appliance.
+
+The proof for the theorem.
+
+The art of origami.
+
+The navigation of the website.
+
+The bureaucracy of the government agency.
+
+The lifecycle of the star.
+
+The process of applying for a visa.
+
+The rules of grammar.
+
+The system of weights and measures.
+
+The internal politics of the office.
+
+The composition of the symphony.
+
+The mechanics of the bicycle.
+
+The steps to change a tire.
+
+The interface of the remote control.
+
+The concept of supply and demand.
+
+The architecture of the internet.
+
+The flow of traffic in the roundabout.
+
+The instructions for the chemistry experiment.
+
+The grading system for the exam.
+
+The process of fermentation.
+
+The logic behind the decision.
+
+The setup of the home theater.
+
+The rules of chess.
+
+The pattern of the knitting project.
+
+The backstory of the video game.
+
+The taxonomy of the animal kingdom.
+
+The procedure for landing the plane.
+
+The plot of the opera.
+
+The design of the logo.
+
+The physics of the roller coaster.
+
+The instructions for the magic trick.
+
+The algorithm for the recommendation system.
+
+The process of evolution.
+
+The layout of the printed circuit board.
+
+The strategy for the marketing campaign.
+
+The nuances of the dialect.
+
+The ingredients list on the package.
+
+The protocol for the emergency response.
+
+The structure of the DNA double helix.
+
+The rules of the sport.
+
+The steps of the dance routine.
+
+The concept of dark matter.
+
+The user manual for the camera.
+
+The details of the insurance policy.
+
+The timeline of the historical events.
+
+The operation of the sewing machine.
+
+The theory of quantum mechanics.
+
+The organization of the library.
+
+The classification of the rocks.
+
+The setup of the wireless network.
+
+The logic of the argument.
+
+The path through the maze.
+
+The workings of the human brain.
+
+The process of assembling the model airplane.
+
+The rules of the drinking game.
+
+The mechanism of the trap door.
+
+The theory of musical harmony.
+
+The instructions for the chemical peel.
+
+The logistics of the wedding seating chart.
+
+The structure of the sentence diagram.
+
+The concept of renewable energy.
+
+The path of the hurricane.
+
+The setup of the surround sound system.
+
+The strategy for the video game boss fight.
+
+The operation of the forklift.
+
+The history of the philosophy.
+
+The grammar of the sign language.
+
+The layout of the amusement park.
+
+The chemistry of the swimming pool.
+
+The design of the ergonomic chair.
+
+The process of applying for a loan.
+
+The rules of the HOA.
+
+The mechanism of the bicycle gears.
+
+The plot of the psychological thriller.
+
+The theory of game design.
+
+The instructions for the scavenger hunt.
+
+The structure of the carbon atom.
+
+The concept of virtual reality.
+
+The biology of the digestive system.
+
+The navigation of the subway map.
+
+The system of Dewey Decimal classification.
+
+The steps to change the oil.
+
+The logic of the sudoku puzzle.
+
+The route of the marathon.
+
+The operation of the telescope.
+
+The history of the internet.
+
+The grammar of the coding syntax.
+
+The layout of the motherboard.
+
+The chemistry of the explosion.
+
+The design of the user experience.
+
+The process of voting.
+
+The rules of the contest.
+
+The mechanism of the hydraulic press.
+
+The plot of the epic poem.
+
+The theory of macroeconomics.
+
+The instructions for the origami crane.
+
+The structure of the solar system.
+
+The concept of emotional intelligence.
+
+The biology of the cell division.
+
+The navigation of the open ocean.
+
+The system of judicial review.
+
+The steps to solve the Rubik's Cube.
+
+The logic of the philosophical argument.
+
+The route of the migration.
+
+The operation of the MRI machine.
+
+The history of the language.
+
+The grammar of the legal document.
+
+The layout of the circuit breaker.
+
+The chemistry of the fermentation.
+
+The design of the skyscraper foundation.
+
+The process of writing a thesis.
+
+The rules of the scavenger hunt.
+
+The mechanism of the wind turbine.
+
+The plot of the avant-garde film.
+
+The theory of chaos.
+
+The instructions for the assembly line.
+
+The structure of the corporation.
+
+The concept of the metaverse.
+
+The biology of the neuron.
+
+The navigation of the labyrinth.
+
+The system of electoral college.
+
+The steps to build a campfire.
+
+The logic of the riddle.
+
+The route of the spice trade.
+
+The operation of the crane.
+
+The history of the stock market.
+
+The grammar of the poetic form.
+
+The layout of the control panel.
+
+The chemistry of the medication.
+
+The design of the sustainable city.
+
+The process of filing a patent.
+
+The rules of the engagement.
+
+The mechanism of the steam engine.
+
+The plot of the historical drama.
+
+The theory of string theory.
+
+The instructions for the software installation.
+
+The structure of the DNA molecule.
+
+The concept of free will.
+
+The biology of the immune response.
+
+The navigation of the air traffic control.
+
+The system of peer review.
+
+The steps to knit a scarf.
+
+The logic of the computer algorithm.
+
+The route of the silk road.
+
+The operation of the printing press.
+
+The history of the universe.
+
+The grammar of the ancient hieroglyphs.
+
+The layout of the chess board.
+
+The chemistry of the fireworks.
+
+The design of the bridge support.
+
+The process of adopting a pet.
+
+The rules of the parliamentary procedure.
+
+The mechanism of the clock tower.

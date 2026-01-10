@@ -36,12 +36,90 @@ torch.backends.cuda.matmul.allow_tf32 = True
 
 
 
-# ------------------------------------------------------------------------
-with open('RR_ckpt/LRR/llama8b/lrr_models_04.pkl', 'rb') as file:
+# # ------------------------------------------------------------------------
+# with open('RR_ckpt/LRR/llama8b/lrr_models_04.pkl', 'rb') as file:
+#     lrr_models = pickle.load(file)
+
+# fixed = 3
+# test_weights, test_biases = force_ones_fixed(lrr_models, fixed=fixed)
+
+# with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_04_fixed_({fixed}).pkl', 'wb') as file:
+#     pickle.dump((test_weights, test_biases), file)
+
+
+# # ------------------------------------------------------------------------done
+# # python runner3.py >> ../all_gitignore/sk2_items/RR_logs/log_fixed_polar_5.txt 2>&1
+# with open('../all_gitignore/sk2_items/RR_ckpt/LRR/llama8b/lrr_models.pkl', 'rb') as file:
+#     lrr_models = pickle.load(file)
+
+# fixed = 5
+
+# test_weights, test_biases = force_ones_fixed_polar(lrr_models, fixed=fixed)
+
+# with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_fixed_polar_({fixed}).pkl', 'wb') as file:
+#     pickle.dump((test_weights, test_biases), file)
+
+# # ------------------------------------------------------------------------done
+# # python runner3.py >> ../all_gitignore/sk2_items/RR_logs/log_fixed_polar_10.txt 2>&1
+# with open('../all_gitignore/sk2_items/RR_ckpt/LRR/llama8b/lrr_models.pkl', 'rb') as file:
+#     lrr_models = pickle.load(file)
+
+# fixed = 10
+
+# test_weights, test_biases = force_ones_fixed_polar(lrr_models, fixed=fixed)
+
+# with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_fixed_polar_({fixed}).pkl', 'wb') as file:
+#     pickle.dump((test_weights, test_biases), file)
+
+# # # -----------------------------------------------------------------------done
+# # python runner3.py >> ../all_gitignore/sk2_items/RR_logs/log_intense_thresh_polar_05.txt 2>&1
+# with open('../all_gitignore/sk2_items/RR_ckpt/LRR/llama8b/lrr_models_intensity.pkl', 'rb') as file:
+#     lrr_models = pickle.load(file)
+
+# thresh = 0.5
+# test_weights, test_biases = force_ones_polar(lrr_models, thresh=thresh)
+
+# with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/intensity/W_b_intensity_polar_({thresh}).pkl', 'wb') as file:
+#     pickle.dump((test_weights, test_biases), file)
+
+# # ------------------------------------------------------------------------running
+# # python runner3.py >> ../all_gitignore/sk2_items/RR_logs/log_intensity_fixed_polar_10.txt 2>&1
+# with open('../all_gitignore/sk2_items/RR_ckpt/LRR/llama8b/lrr_models_intensity.pkl', 'rb') as file:
+#     lrr_models = pickle.load(file)
+
+# fixed = 10
+
+# test_weights, test_biases = force_ones_fixed_polar(lrr_models, fixed=fixed)
+
+# with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/intensity/W_b_intensity_fixed_polar_({fixed}).pkl', 'wb') as file:
+#     pickle.dump((test_weights, test_biases), file)
+
+# ------------------------------------------------------------------------todo
+# python runner3.py >> /scratch/bbjr/skarmakar/neuinv/sk2_items/RR_logs/2log_genadj_fixed_polar_5.txt 2>&1
+
+category = "complexity"
+print(category)
+
+with open(f'/scratch/bbjr/skarmakar/neuinv/sk2_items/adj_ckpt/LRR/llama8b/{category}_models.pkl', 'rb') as file:
     lrr_models = pickle.load(file)
 
-fixed = 3
-test_weights, test_biases = force_ones_fixed(lrr_models, fixed=fixed)
+fixed = 5
 
-with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/W_b_04_fixed_({fixed}).pkl', 'wb') as file:
+test_weights, test_biases = force_ones_fixed_polar(lrr_models, fixed=fixed)
+
+with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/gen_adj/Wb_fixed_polar_({category})({fixed}).pkl', 'wb') as file:
+    pickle.dump((test_weights, test_biases), file)
+
+
+category = "logic"
+print(category)
+
+with open(f'/scratch/bbjr/skarmakar/neuinv/sk2_items/adj_ckpt/LRR/llama8b/{category}_models.pkl', 'rb') as file:
+    lrr_models = pickle.load(file)
+
+fixed = 5
+
+test_weights, test_biases = force_ones_fixed_polar(lrr_models, fixed=fixed)
+
+with open(f'/scratch/bbjr/skarmakar/neuinv/min_rank/llama8b/gen_adj/Wb_fixed_polar_({category})({fixed}).pkl', 'wb') as file:
     pickle.dump((test_weights, test_biases), file)

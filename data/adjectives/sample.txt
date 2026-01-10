@@ -1,0 +1,30 @@
+1. Physical Properties & Dimensions
+    ["Big", "Small", "Wide", "Narrow", "Thick", "Thin", "Tall", "Short", "Deep", "Shallow", "Heavy", "Light", "Strong", "Weak", "Full", "Empty",]
+
+2. Texture & Sensation
+These test sensory grounding.
+
+    ["Hard", "Soft", "Rough", "Smooth", "Sharp", "Dull", "Wet", "Dry", "Hot", "Cold", "Bright", "Dim", "Loud", "Quiet", "Sweet", "Bitter",]
+
+3. Time, Speed & Age
+These test temporal concepts.
+    ["Fast", "Slow", "Early", "Late", "Young", "Old", "New", "Ancient", "Modern", "Traditional", "Permanent", "Temporary", "Brief", "Lengthy",]
+
+4. Complexity & Difficulty
+These test abstract cognitive evaluations.
+
+    ["Simple", "Complex", "Easy", "Difficult", "Basic", "Advanced", "Clear", "Confusing", "Obvious", "Subtle",]
+
+5. Logic, Truth & Validity
+These are high-stakes semantic flips often used in reasoning tasks.
+
+    ["True", "False", "Correct", "Incorrect", "Logical", "Illogical", "Rational", "Irrational", "Possible", "Impossible", "Likely", "Unlikely", "Real", "Fake",]
+
+6. Social & Moral Traits (Non-Emotional)
+These are close to emotions but distinct (they describe character or behavior, not internal feeling).
+
+    ["Honest", "Dishonest", "Polite", "Rude", "Generous", "Stingy", "Brave", "Cowardly", "Innocent", "Guilty", "Famous", "Unknown", "Public", "Private",]
+
+7. State & Availability
+    ["Open", "Closed", "Dead", "Alive", "Active", "Passive", "Safe", "Dangerous", "Clean", "Dirty", "Broken", "Fixed",]
+

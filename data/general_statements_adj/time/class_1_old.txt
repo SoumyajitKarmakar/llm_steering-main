@@ -1,0 +1,399 @@
+The elevator ride to the top floor.
+
+The queue at the grocery store.
+
+The connection to the internet.
+
+The athlete's reaction to the starting gun.
+
+The falling of the autumn leaves.
+
+The courier delivering the package.
+
+The snail moving across the sidewalk.
+
+The cheetah chasing its prey.
+
+The rumor spreading through the town.
+
+The bicycle stored in the shed.
+
+The wine aging in the cellar.
+
+The technology used in the laboratory.
+
+The bridge crossing the bay.
+
+The coins in the collection.
+
+The stars visible in the night sky.
+
+The thunder following the lightning flash.
+
+The butterfly's life cycle.
+
+The duration of the final exam.
+
+The wait for a table at the restaurant.
+
+The reign of the dinosaurs.
+
+The blinking cursor on the screen.
+
+The arrival of the wedding guest.
+
+The submission of the homework assignment.
+
+The departure of the international flight.
+
+The start of the business meeting.
+
+The footprint left in the sand.
+
+The carving in the stone monument.
+
+The tattoo on the person's arm.
+
+The shape of the cloud.
+
+The bubble floating in the air.
+
+The mountain range forming the horizon.
+
+The recovery from the illness.
+
+The battery charging process.
+
+The downloading of the update.
+
+The melting of the ice cream.
+
+The sunrise in the morning.
+
+The sunset in the evening.
+
+The change of the traffic light.
+
+The growth of the bamboo.
+
+The decomposition of the fallen log.
+
+The flight of the hummingbird.
+
+The drift of the continents.
+
+The oscillation of the pendulum.
+
+The rotation of the fan blades.
+
+The pace of the walking tour.
+
+The tempo of the song.
+
+The era of the industrial revolution.
+
+The age of the information superhighway.
+
+The freshness of the produce.
+
+The expiration date on the carton.
+
+The memory of the childhood event.
+
+The planning of the wedding.
+
+The construction of the pyramid.
+
+The corrosion of the metal.
+
+The healing of the broken bone.
+
+The transmission of the signal.
+
+The echo in the canyon.
+
+The ripple in the water.
+
+The burning of the candle.
+
+The fading of the photograph.
+
+The arrival of the seasonal rains.
+
+The completion of the puzzle.
+
+The tenure of the professor.
+
+The dynasty of the ruling family.
+
+The cycle of the moon.
+
+The orbit of the comet.
+
+The heartbeat of the runner.
+
+The growth of the startup company.
+
+The decline of the ancient city.
+
+The preservation of the artifact.
+
+The rush hour traffic jam.
+
+The flow of molasses.
+
+The sprint of the greyhound.
+
+The movement of the sloth.
+
+The loading screen on the computer.
+
+The digestion of the meal.
+
+The fermentation of the beer.
+
+The drying of the paint.
+
+The erosion of the coastline.
+
+The shifting of the sand dunes.
+
+The update of the news feed.
+
+The reply to the email.
+
+The turnaround time for the repair.
+
+The lifespan of the battery.
+
+The duration of the contract.
+
+The term of the presidency.
+
+The age of the universe.
+
+The instant the photo was taken.
+
+The history of the family tree.
+
+The tradition of the festival.
+
+The innovation in the industry.
+
+The antique shop inventory.
+
+The ruins of the castle.
+
+The skyscraper under construction.
+
+The baby sleeping in the crib.
+
+The elder sitting on the bench.
+
+The puppy chasing its tail.
+
+The tortoise eating the lettuce.
+
+The hare racing across the field.
+
+The clock ticking on the wall.
+
+The spinning of the fan blades.
+
+The drying of the cement.
+
+The race between the competitors.
+
+The crawl of the traffic.
+
+The flight of the rocket.
+
+The falling of the sand in the hourglass.
+
+The beat of the drum.
+
+The cycle of the washing machine.
+
+The blooming of the rose.
+
+The rusting of the iron.
+
+The digestion of the food.
+
+The solving of the equation.
+
+The writing of the novel.
+
+The building of the skyscraper.
+
+The evolution of the language.
+
+The journey of the explorer.
+
+The reign of the queen.
+
+The life of the battery.
+
+The duration of the eclipse.
+
+The pause in the conversation.
+
+The instant the lightning strikes.
+
+The millennia the rock has sat there.
+
+The era of the steam engine.
+
+The age of the digital revolution.
+
+The freshness of the baked goods.
+
+The antiquity of the manuscript.
+
+The novelty of the invention.
+
+The maturity of the investment.
+
+The youth of the seedlings.
+
+The senility of the old dog.
+
+The speed of light.
+
+The velocity of the sound wave.
+
+The pace of the snail.
+
+The tempo of the jazz song.
+
+The rhythm of the heartbeat.
+
+The urgency of the message.
+
+The delay of the flight.
+
+The frequency of the waves.
+
+The interval between the bells.
+
+The period of the pendulum.
+
+The epoch of the dinosaurs.
+
+The dynasty of the pharaohs.
+
+The generation of the smartphone.
+
+The vintage of the wine.
+
+The heritage of the building.
+
+The lineage of the family.
+
+The ancestry of the DNA.
+
+The future of the project.
+
+The past of the ruins.
+
+The present moment.
+
+The sprint of the cheetah.
+
+The marathon of the runner.
+
+The stroll of the couple.
+
+The march of the soldiers.
+
+The migration of the birds.
+
+The drift of the iceberg.
+
+The flow of the lava.
+
+The cascade of the waterfall.
+
+The rise of the tide.
+
+The fall of the leaves.
+
+The growth of the economy.
+
+The decline of the civilization.
+
+The expansion of the balloon.
+
+The contraction of the pupil.
+
+The acceleration of the car.
+
+The deceleration of the train.
+
+The momentum of the ball.
+
+The inertia of the object.
+
+The stillness of the pond.
+
+The chaos of the storm.
+
+The permanence of the tattoo.
+
+The transience of the bubble.
+
+The durability of the material.
+
+The fragility of the glass.
+
+The eternity of the universe.
+
+The brevity of the spark.
+
+The longevity of the turtle.
+
+The mortality of the insect.
+
+The routine of the morning.
+
+The spontaneity of the trip.
+
+The schedule of the trains.
+
+The timing of the joke.
+
+The synchronization of the watches.
+
+The delay in the transmission.
+
+The lag in the video game.
+
+The swiftness of the response.
+
+The slowness of the recovery.
+
+The rush of the adrenaline.
+
+The drag of the friction.
+
+The haste of the decision.
+
+The patience of the teacher.
+
+The waiting in the lobby.
+
+The anticipation of the event.
+
+The nostalgia for the old days.
+
+The hope for the new year.
+
+The memory of the first kiss.
+
+The history of the war.
+
+The legend of the hero.
+
+The myth of the creation.
+
+The prophecy of the end times.
