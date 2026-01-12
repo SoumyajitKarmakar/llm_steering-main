@@ -142,7 +142,7 @@ def main():
     lowers = [True, True, True, True, True, True, True, ]
     dataset_labels = ['complexity', 'logic', 'physical', 'social', 'state', 'texture', 'time']
     # save_path = 'all_gitignore/directions_adjectives_llama/{}/'
-    save_path = 'all_gitignore/directions_adjectives_llama/{}/'
+    save_path = 'all_gitignore/directions_adjectives_llama_class0/{}/'
 
 
     model_type = 'llama'
@@ -166,7 +166,8 @@ def main():
         for concept_idx, concept in enumerate(tqdm(concepts)):
             print(f"=============================================CONCEPT={concept}=============================================")
 
-            dataset = utils_concepts.pca_adjective_dataset(llm, concept, dataset_label)
+            # dataset = utils_concepts.pca_adjective_dataset(llm, concept, dataset_label)
+            dataset = utils_concepts.pca_adjective_dataset(llm, concept, dataset_label, same_data=True)
             
             # if dataset_label == 'complexity':
             #     dataset = utils_concepts.pca_fears_dataset(llm, concept)

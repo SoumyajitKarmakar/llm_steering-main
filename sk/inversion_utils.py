@@ -177,8 +177,10 @@ def compare_cosine(concept1, concept2):
         print(f'layer: {l}, cosine: {c}')
         total_c += c
         
-    print(f'total: {total_c}')
-    return total_c
+    avg = total_c / len(concept1)
+    print(f'Average: {avg:.2f}')
+    
+    return avg
 
 
 def just_dirs(llm, concept, path='../all_gitignore/directions_moods/'):
@@ -205,6 +207,19 @@ def load_controller(llm, concept, path='../all_gitignore/directions_moods/'):
     )
 
     tcontroller.load(concept=concept, model_name=llm.name, path=path)
+
+    return tcontroller
+
+def load_controller_translate(llm, concept, orig_lang, path='../all_gitignore/directions_moods/'):
+    tcontroller = NeuralController(
+        llm,
+        llm.tokenizer,
+        rfm_iters=8,
+        control_method="rfm",
+        n_components=1,
+    )
+
+    tcontroller.load_translate(concept=concept, model_name=llm.name, orig_lang=orig_lang, path=path)
 
     return tcontroller
 
@@ -390,8 +405,9 @@ def read_tuples_with_category(llm, antonyms, path='../directions_moods/'):
 
     return X, Y
 
-def read_tuples_single_with_category(llm, words, path='../directions_moods/'):
-    hidden_layers = list(range(-1, -llm.language_model.config.num_hidden_layers, -1))
+def read_tuples_single_with_category(llm, words, path='../directions_moods/', hidden_layers=None):
+    if hidden_layers is None:
+        hidden_layers = list(range(-1, -llm.language_model.config.num_hidden_layers, -1))
 
     Xt = {i: [] for i in hidden_layers}
 
@@ -471,6 +487,43 @@ def LRR_auto(X, Y, print_error=False, alpha=10000.0):
         lrr_models[i] = model_lrr
     
     return lrr_models
+
+def LRR_single(X, Y, alpha=1000.0, print_error=True):
+
+    if isinstance(alpha, float):
+        print(f"Running with fixed alpha: {alpha}")
+        reg_lrr = make_pipeline(StandardScaler(), Ridge(alpha=alpha, solver='cholesky'))
+    elif isinstance(alpha, np.ndarray):
+        alphas = 10.0 ** alpha  # log grid
+        print(f"Running with alpha: {alphas}")
+        reg_lrr = make_pipeline(StandardScaler(), RidgeCV(alphas=alphas, cv=10))
+    else:
+        # if alpha=None, find the best alpha
+        alphas = 10.0 ** np.arange(2, 5)  # log grid
+        print(f"Running with alpha: {alphas}")
+        reg_lrr = make_pipeline(StandardScaler(), RidgeCV(alphas=alphas, cv=10))
+        
+    model_lrr = TransformedTargetRegressor(regressor=reg_lrr, transformer=StandardScaler())
+
+    model_lrr.fit(X, Y)
+
+    if not isinstance(alpha, float):
+        best_alpha_lrr = model_lrr.regressor_.named_steps["ridgecv"].alpha_
+        print(f"Best lambda: {best_alpha_lrr}")
+
+    if print_error:
+        y_pred = model_lrr.predict(X)
+        mse = mean_squared_error(Y, y_pred)
+        rmse = np.sqrt(mse)
+
+        r2 = r2_score(Y, y_pred)
+
+        print(f"Training RMSE: {rmse:.4f}, Training R2: {r2:.4f}")
+
+    print(f"Done.")
+
+    return model_lrr
+
 
 def KRR_auto(X, Y):
     # add args for cv, gamma, and alpha

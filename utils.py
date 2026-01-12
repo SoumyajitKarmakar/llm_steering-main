@@ -2775,3 +2775,85 @@ def hallucination_dataset(data_path, llm, seed: int = 0):
         'train': {'inputs': train_data, 'labels': train_labels},
         'test': {'inputs': test_data, 'labels': [[1,0]] * ntrain}
     }
+
+
+# ['english', 'french', 'german', 'hindi', 'italian', 'portuguese', 'spanish', 'thai']
+def multilingual_dataset(llm, orig_lang, other_lang, seed=0):
+    tokenizer = llm.tokenizer
+    random.seed(0)
+    
+    from datasets import load_dataset
+
+    # Map common names to FLORES-200 codes
+    # See: https://github.com/facebookresearch/flores/blob/main/flores200/README.md
+    lang_map = {
+        'english': 'eng_Latn',
+        'german': 'deu_Latn',
+        # 'chinese': 'zho_Hans',
+        'hindi': 'hin_Deva',
+        'spanish': 'spa_Latn',
+        'french': 'fra_Latn',
+        'italian': 'ita_Latn',
+        'portuguese': 'por_Latn',
+        'thai': 'tha_Thai',
+    }
+
+    code_orig = lang_map.get(orig_lang, orig_lang)
+    code_other = lang_map.get(other_lang, other_lang)
+
+    print(f"Loading FLORES-200 for {orig_lang} ({code_orig}) and {other_lang} ({code_other})...")
+    
+    # Load dev split (997 sentences) which is sufficient for steering
+    ds_orig = load_dataset("facebook/flores", code_orig, split="dev", trust_remote_code=True)
+    ds_other = load_dataset("facebook/flores", code_other, split="dev", trust_remote_code=True)
+
+    raw_data = {}
+    raw_data[orig_lang] = ds_orig['sentence']
+    raw_data[other_lang] = ds_other['sentence']
+    
+    formatted_data = {}
+    
+    c_e, o_e = raw_data[orig_lang], raw_data[other_lang]
+    
+    data = []
+    user_template = 'Complete the translation of the following statement in {orig_lang} to {new_lang}. \nStatement: {statement}\nTranslation: {partial}'
+
+    # Use 200 samples to match language_dataset size
+    n = 200 
+    c_e, o_e = c_e[:n], o_e[:n]
+
+    orig_texts = c_e + c_e
+    new_texts = c_e + o_e
+    labels = [0 for _ in range(n)] + [1 for _ in range(n)]
+    new_langs = [orig_lang for _ in range(n)] + [other_lang for _ in range(n)]
+
+    data = []
+    for old, new, new_lang in zip(orig_texts, new_texts, new_langs):
+        
+        idx = max(len(new)//2, 1)
+        partial = new[:idx]
+        
+        prompt = user_template.format(orig_lang=orig_lang, new_lang=new_lang, statement=old, partial=partial)
+        chat = [
+                {
+                "role": "user", 
+                "content": prompt
+                }
+        ]
+        ex = tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True).strip()
+        data.append(ex)
+
+
+    combined = list(zip(data, labels))
+    random.shuffle(combined)
+    data, labels = zip(*combined)
+
+    train_data = data    
+    train_labels = labels
+    print("train", len(train_data))
+
+    formatted_data[other_lang] = {
+        'train': {'inputs': train_data, 'labels': train_labels},
+    }
+
+    return formatted_data

@@ -6,7 +6,7 @@ from utils import LLMType
 # CONCEPT CATEGORIES AND THEIR PROMPT TEMPLATES
 # =============================================================================
 
-def pca_adjective_dataset(llm, mood, category, seed=0):
+def pca_adjective_dataset(llm, mood, category, seed=0, same_data=False):
     tokenizer = llm.tokenizer
     concept_type = mood
 
@@ -45,8 +45,13 @@ def pca_adjective_dataset(llm, mood, category, seed=0):
     
 
     with open(os.path.join(data_dir, f"class_0.txt"), encoding="utf-8") as f:
-            raw_data = f.readlines()
-    with open(os.path.join(data_dir, f"class_1.txt"), encoding="utf-8") as f:
+        raw_data = f.readlines()
+    
+    if same_data:
+        print("Using same data for both classes.")
+        raw_data_2 = raw_data
+    else:
+        with open(os.path.join(data_dir, f"class_1.txt"), encoding="utf-8") as f:
             raw_data_2 = f.readlines()
 
 

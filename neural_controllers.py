@@ -363,7 +363,39 @@ class NeuralController:
             print("Detector found")
             with open(detector_path, 'rb') as f:
                 self.detector_coefs = pickle.load(f)
+    
+    # ----------------------------------------
+    def save_translate(self, concept, model_name, orig_lang="", path='./', composite=False):
+        if composite:
+            filename = os.path.join(path, f'{self.control_method}_composite_{concept}_{model_name}.pkl')
+        else:
+            filename = os.path.join(path, f'{self.control_method}_{orig_lang}TO{concept}_{model_name}.pkl')
+            
+        with open(filename, 'wb') as f:
+            pickle.dump(self.directions, f)
+
+        if self.detector_coefs is not None:
+            detector_path = os.path.join(path, f'{self.control_method}_{orig_lang}TO{concept}_{model_name}_detector.pkl')
+            with open(detector_path, 'wb') as f:
+                pickle.dump(self.detector_coefs, f)
+            
+    def load_translate(self, concept, model_name, orig_lang="", path='./', composite=False):
+        if composite:
+            filename = os.path.join(path, f'{self.control_method}_composite_{concept}_{model_name}.pkl')
+        else:
+            filename = os.path.join(path, f'{self.control_method}_{orig_lang}TO{concept}_{model_name}.pkl')
+        with open(filename, 'rb') as f:
+            self.directions = pickle.load(f)
+            self.hidden_layers = self.directions.keys()
         
+        detector_path = os.path.join(path, f'{self.control_method}_{orig_lang}TO{concept}_{model_name}_detector.pkl')
+        if os.path.exists(detector_path):
+            print("Detector found")
+            with open(detector_path, 'rb') as f:
+                self.detector_coefs = pickle.load(f)
+    # ----------------------------------------
+        
+
     def format_prompt(self, prompt, role='user'):
         if self.name == 'toxicchat-t5-large':
             new_prompt = f"ToxicChat: {prompt}"

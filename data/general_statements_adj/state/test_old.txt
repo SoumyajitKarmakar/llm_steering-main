@@ -1,0 +1,99 @@
+The seat at the head of the table. 
+
+The occupancy of the parking garage. 
+
+The connection to the VPN. 
+
+The availability of the conference room. 
+
+The charge of the EV battery. 
+
+The readiness of the troops. 
+
+The emptiness of the auditorium. 
+
+The darkness of the alleyway. 
+
+The silence of the monastery. 
+
+The stillness of the morning air. 
+
+The chaos of the stock exchange floor. 
+
+The peace of the Zen garden. 
+
+The safety of the climbing gear. 
+
+The danger of the high voltage line. 
+
+The toxicity of the waste. 
+
+The sterility of the lab environment. 
+
+The purity of the spring water. 
+
+The corruption of the politician. 
+
+The encryption of the hard drive. 
+
+The visibility in the fog. 
+
+The accessibility of the website. 
+
+The vacancy of the job position. 
+
+The occupancy of the hotel. 
+
+The availability of the tickets. 
+
+The validity of the credit card. 
+
+The expiration of the warranty. 
+
+The freshness of the flowers. 
+
+The ripeness of the banana. 
+
+The warmth of the embrace. 
+
+The coldness of the reception. 
+
+The wetness of the grass. 
+
+The dryness of the skin. 
+
+The hardness of the diamond. 
+
+The softness of the fur. 
+
+The smoothness of the silk. 
+
+The roughness of the bark. 
+
+The sharpness of the wit. 
+
+The dullness of the blade. 
+
+The brightness of the star. 
+
+The dimness of the candle. 
+
+The loudness of the explosion. 
+
+The quietness of the mouse. 
+
+The clarity of the explanation. 
+
+The fuzziness of the memory. 
+
+The stability of the economy. 
+
+The wobbliness of the bike. 
+
+The tightness of the knot. 
+
+The looseness of the grip. 
+
+The straightness of the arrow. 
+
+The curvature of the spine.
