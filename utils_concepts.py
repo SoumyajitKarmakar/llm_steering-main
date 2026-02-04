@@ -6,11 +6,11 @@ from utils import LLMType
 # CONCEPT CATEGORIES AND THEIR PROMPT TEMPLATES
 # =============================================================================
 
-def pca_adjective_dataset(llm, mood, category, seed=0, same_data=False):
+def pca_adjective_dataset(llm, mood, category, seed=0, data_path='data/general_statements_adj/{}/', data_file="class0-1"):
     tokenizer = llm.tokenizer
     concept_type = mood
 
-    data_dir = 'data/general_statements_adj/{}/'.format(category)
+    data_dir = data_path.format(category)
     # data_dir = 'data/general_statements' # old
 
     random.seed(0)
@@ -44,15 +44,42 @@ def pca_adjective_dataset(llm, mood, category, seed=0, same_data=False):
         default_str = 'Describe the following event or entity. \nSubject: {statement}'
     
 
-    with open(os.path.join(data_dir, f"class_0.txt"), encoding="utf-8") as f:
-        raw_data = f.readlines()
+    # with open(os.path.join(data_dir, f"class_0.txt"), encoding="utf-8") as f:
+    #     raw_data = f.readlines()
     
-    if same_data:
-        print("Using same data for both classes.")
+    # if same_data:
+    #     print("Using same data for both classes.")
+    #     raw_data_2 = raw_data
+    # else:
+    #     with open(os.path.join(data_dir, f"class_1.txt"), encoding="utf-8") as f:
+    #         raw_data_2 = f.readlines()
+
+    if data_file == "class0":
+        print("Using class0 for both classes.")
+        with open(os.path.join(data_dir, f"class_0.txt"), encoding="utf-8") as f:
+            raw_data = f.readlines()
         raw_data_2 = raw_data
-    else:
+    elif data_file == "class1":
+        print("Using class1 for both classes.")
+        with open(os.path.join(data_dir, f"class_1.txt"), encoding="utf-8") as f:
+            raw_data = f.readlines()
+        raw_data_2 = raw_data
+    elif data_file == "class0-1":
+        # default
+        print("Using class0 -> class1")
+        with open(os.path.join(data_dir, f"class_0.txt"), encoding="utf-8") as f:
+            raw_data = f.readlines()
         with open(os.path.join(data_dir, f"class_1.txt"), encoding="utf-8") as f:
             raw_data_2 = f.readlines()
+    elif data_file == "class1-0":
+        print("Using class1 -> class0")
+        with open(os.path.join(data_dir, f"class_1.txt"), encoding="utf-8") as f:
+            raw_data = f.readlines()
+        with open(os.path.join(data_dir, f"class_0.txt"), encoding="utf-8") as f:
+            raw_data_2 = f.readlines()
+    else:
+        print("Give correct data_file option!!")
+        return
 
 
     csp_data = [user_str.format(concept_type=mood, statement=s) for s in raw_data]
@@ -68,7 +95,12 @@ def pca_adjective_dataset(llm, mood, category, seed=0, same_data=False):
                 "content": s
             },
             ]
-        elif llm_type == LLMType.GEMMA_TEXT:
+        elif llm_type == LLMType.QWEN_TEXT:
+            chat = [
+                {"role": "system", "content": "You are a helpful assistant. You strictly follow the given instructions."},
+                {"role": "user", "content": s}
+            ]
+        elif llm_type == LLMType.GEMMA_TEXT: # honestly this is not needed, the above format works just as well.
             chat = [
             {
                 "role": "user", 
@@ -85,6 +117,11 @@ def pca_adjective_dataset(llm, mood, category, seed=0, same_data=False):
                 "role": "user", 
                 "content": s
             },
+            ]
+        elif llm_type == LLMType.QWEN_TEXT:
+            chat = [
+                {"role": "system", "content": "You are a helpful assistant. You strictly follow the given instructions."},
+                {"role": "user", "content": s}
             ]
         elif llm_type == LLMType.GEMMA_TEXT:
             chat = [

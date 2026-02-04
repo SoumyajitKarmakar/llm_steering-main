@@ -1,0 +1,200 @@
+Sort an array in ascending order (implement Bubble Sort).
+Implement a Queue using an array.
+Count the number of punctuation marks in a string.
+Find the midpoint between two coordinates  and .
+Simulate rolling a six-sided die.
+Reverse a given integer (e.g., 123 to 321).
+Create a class `Student` with name and grade attributes, and a method to print details.
+Find the missing number in an array containing  to .
+Print "Hello, World!" to the console.
+Find the Greatest Common Divisor (GCD) of two numbers.
+Move all zeros in an array to the end while maintaining the order of non-zero elements.
+Convert a binary number to decimal.
+Find the degree of a vertex in a graph (adjacency matrix).
+Check if a string is a subsequence of another string.
+Implement Selection Sort.
+Remove all non-alphanumeric characters from a string.
+Check if a string contains only digits.
+Check if a number is even or odd using bitwise operators.
+Determine the quadrant of a coordinate point .
+Create a class `Car` with attributes model and year, and a method to "start engine."
+Check if a person is eligible to vote based on age input.
+Define a structure or class for a Singly Linked List node.
+Find the median of a sorted array.
+Find the second largest element in an array.
+Check if a number is a Palindrome.
+Simulate a coin toss (print Head or Tail randomly).
+Split a string by a delimiter and store it in an array/list.
+Remove a specific key-value pair from a map/dictionary.
+Check if two strings are anagrams.
+Implement method overriding: Create a `Shape` class and a `Square` subclass with different area logic.
+Solve the Tower of Hanoi problem for 3 disks.
+Check if an array contains a specific value.
+Iterate through a map and print all keys and values.
+Create a class `Book` with title and author, and a method to display book info.
+Calculate the simple interest given principal, rate, and time.
+Check if a number is a power of 2 using bitwise operators.
+Find the union of two arrays.
+Check if a given integer is even or odd.
+Toggle the -th bit of a number.
+Calculate the power of a number  using recursion.
+Capitalize the first letter of each word in a sentence.
+Calculate the area of a triangle using Heron's formula.
+Calculate the area of a circle given its radius.
+Create a class `BankAccount` with deposit and withdraw methods.
+Find the maximum element in an array.
+Check if a given number is positive, negative, or zero.
+Rotate an array to the right by  positions.
+Implement a function to validate an email address (simple format check).
+Delete a specific file.
+Create a class `Rectangle` with attributes length and width and a method to calculate area.
+Calculate the volume of a sphere.
+Define a structure or class for a Binary Tree node.
+Remove all vowels from a string.
+Count the number of digits in a number using recursion.
+Check if a map contains a specific key.
+Check if a character is an alphabet, digit, or special character.
+Calculate the hypotenuse of a right-angled triangle given the other two sides.
+Reshape a 1D array into a 2D matrix.
+Find the longest word in a sentence.
+Find the longest common prefix among an array of strings.
+Find the minimum value in a binary search tree (conceptual logic).
+Convert a temperature from Fahrenheit to Celsius.
+Print a checkerboard pattern of asterisks.
+Find the mode (most frequent element) of an array.
+Create a class `Employee` and calculate annual salary based on monthly pay.
+Parse a string "HH:MM:SS" and convert it to total seconds.
+Implement a constructor for a `Person` class that initializes name and age.
+Calculate the factorial of a number using recursion.
+Convert a given number of days into years, weeks, and days.
+Calculate the perimeter of a rectangle.
+Implement a simple calculator using a switch-case or if-else (add, sub, mul, div).
+Generate the Fibonacci sequence up to  terms.
+Append text to an existing file.
+Add two matrices of the same size.
+Swap the first and last characters of a string.
+Calculate the power of a number using a loop (without built-in exponent function).
+Check if one array is a subset of another.
+Reverse a string.
+Clear the -th bit of a number (set to 0).
+Calculate the exact age in years given a birthdate.
+Transpose a graph represented as an adjacency matrix.
+Solve the "FizzBuzz" problem (print Fizz for multiples of 3, Buzz for 5, FizzBuzz for both).
+Convert a decimal number to binary.
+Swap the values of two variables without using a third variable.
+Determine the grade based on a score (e.g., A, B, C, D, F).
+Calculate the volume of a cylinder.
+Implement a simple hash function for a string (e.g., sum of ASCII values).
+Check if a string starts with a specific substring.
+Find the average of elements in an array.
+Check if a triangle is valid based on the lengths of its three sides.
+Find the duplicate number in an array of  integers.
+Generate a random password of length  containing mixed characters.
+Implement inheritance: Create a `Dog` class that inherits from `Animal`.
+Concatenate two strings.
+Implement Linear Search to find an element in an array.
+Find the minimum element in an array.
+Merge two maps/dictionaries.
+Flatten a 2D array into a 1D array.
+Check if a given number is a Prime number.
+Reverse a string using recursion.
+Implement a simple Caesar Cipher (shift characters by ).
+Find the first non-repeating character in a string.
+Replace all occurrences of a character with another character.
+Find the intersection of two arrays.
+Classify a triangle as equilateral, isosceles, or scalene.
+Calculate the Hamming distance between two integers.
+Read the content of a text file and print it to the console.
+Calculate the sum of all natural numbers up to .
+Print natural numbers from 100 down to 1.
+Set the -th bit of a number to 1.
+Print natural numbers from 1 to 100.
+Count the number of words in a sentence.
+Take two integers as input and print their sum.
+Find the difference between two arrays (elements in A but not B).
+Determine if a string is a valid classic parenthesis sequence (e.g., "((()))").
+Check if a string is a palindrome using recursion.
+Find the index of the first occurrence of a specific number in an array.
+Convert a temperature from Celsius to Fahrenheit.
+Check if a number is a Perfect number.
+Calculate the roots of a quadratic equation.
+Check if a Sudoku row is valid (contains 1-9 exactly once).
+Find the Least Common Multiple (LCM) of two numbers.
+Convert kilometers to miles.
+Calculate the factorial of a given number.
+Find the maximum of three numbers.
+Check if a number is a "Happy Number".
+Generate a random number between a specified range.
+Find the only non-repeating element in an array where every other element repeats twice.
+Implement Insertion Sort.
+Count the number of digits in an integer.
+Reverse the elements of an array.
+Count the number of lines in a text file.
+Count the number of set bits (1s) in an integer.
+Print a pyramid pattern of stars with height .
+Count the occurrences of a specific element in an array.
+Multiply two matrices.
+Check if a string is a palindrome.
+Convert kilograms to pounds.
+Calculate the slope of a line passing through two points.
+Count pairs in an array that sum up to a specific target value.
+Merge two arrays into one.
+Get the current date and time.
+Implement a stack using an array (push and pop).
+Remove all whitespace from a string.
+Calculate the sum of natural numbers up to  using recursion.
+Count the frequency of each number in an array using a map/dictionary.
+Remove duplicate elements from an array.
+Convert an integer to a hexadecimal string.
+Convert a string to all uppercase.
+Calculate the difference between two dates in days.
+Create a new text file and write a string to it.
+Check if three points are collinear.
+Create a class `Circle` with a method to calculate circumference.
+Determine if two rectangles overlap.
+Calculate the surface area of a cube.
+Calculate the sum of digits of a number.
+Toggle the case of each character in a string.
+Compute the value of  (x raised to the power of y).
+Check if two arrays are equal.
+Check if a string is a valid integer (manual parsing).
+Take two integers as input and print their product.
+Calculate and print the remainder of two integers (modulo operation).
+Convert a string to all lowercase.
+Check if a number is an Armstrong number.
+Print the multiplication table of a given number.
+Copy the contents of one file to another.
+Convert an integer to a string without using built-in string conversion.
+Check if a character is a vowel or a consonant.
+Calculate the sum of all elements in an array.
+Multiply a number by 4 using bitwise shifts.
+Calculate the compound interest given principal, rate, and time.
+Find the Greatest Common Divisor (GCD) of two numbers using recursion.
+Divide a number by 2 using bitwise shifts.
+Print all Prime numbers between 1 and 100.
+Generate the -th Fibonacci number using recursion.
+Print the elements of an array using recursion.
+Implement Binary Search on a sorted array.
+Find the length of a string without using a built-in length function.
+Sort an array in descending order.
+Convert a sentence to Title Case.
+Calculate the square root of a given number.
+Create a generic Key-Value pair class or struct.
+Count the frequency of characters in a string.
+Find the index of the last occurrence of a specific number in an array.
+Find the maximum of two numbers.
+Convert a string of numbers to an integer (implementation of `atoi`).
+Convert an octal number to decimal.
+Convert a hexadecimal string to an integer.
+Convert a float to an integer (demonstrating truncation vs rounding).
+Convert minutes into hours and minutes.
+Swap two numbers using bitwise XOR.
+Check if a given year is a leap year.
+Calculate the distance between two points  and .
+Check if a given number is divisible by both 5 and 11.
+Count the number of vowels and consonants in a string.
+Invert a map (swap keys and values).
+Find the first occurrence of a substring in a string.
+Transpose a matrix.
+Compress a string using counts (e.g., "aaabb" becomes "a3b2").
+Calculate the average of three numbers input by the user.

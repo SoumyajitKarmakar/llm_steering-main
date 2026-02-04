@@ -2,6 +2,7 @@ import requests
 import os
 import io
 from PIL import Image
+import torch
 
 
 def extract_image(image_input):
@@ -145,19 +146,75 @@ def generate_on_text(model, tokenizer, input_text, **kwargs):
     # Decode the output
     generated_text = tokenizer.decode(outputs[0])
     return generated_text
+
+def generate_on_text_qwen(model, tokenizer, input_text, **kwargs):
+        
+    # Tokenize the input text
+    inputs = tokenizer(input_text, return_tensors="pt", add_special_tokens=False).to(model.device)
+
+    # stop_token_id = tokenizer.convert_tokens_to_ids("<|eot_id|>")
+    # Generate output
+    outputs = model.generate(
+        **inputs,
+        # eos_token_id=stop_token_id,        
+        **kwargs,
+        # stopping_criteria=[StoppingCriteriaList([stop_token_id])])        
+    )
+
+    # # Decode the output
+    # generated_text = tokenizer.decode(outputs[0])
+    # return generated_text
+
+
+    # -------------
+    # output_ids = outputs[0].tolist() 
+    output_ids = outputs[0][len(inputs.input_ids[0]):].tolist() 
+
+    content = tokenizer.decode(output_ids, skip_special_tokens=True)
+
+    return content
+
+    # -------------
+    # needed only for thinking
     
+    # output_ids = outputs[0][len(inputs.input_ids[0]):].tolist() 
+
+    # # parsing thinking content
+    # try:
+    #     # rindex finding 151668 (</think>)
+    #     index = len(output_ids) - output_ids[::-1].index(151668)
+    # except ValueError:
+    #     index = 0
+
+    # thinking_content = tokenizer.decode(output_ids[:index], skip_special_tokens=True).strip("\n")
+    # content = tokenizer.decode(output_ids[index:], skip_special_tokens=True).strip("\n")
+
+    # return content
+    # -------------
+
+
+
 def hook_model(model, directions, layers_to_control, control_coef):
     hooks = {}
     
     # For multimodal models, hook only the language model layers
     if hasattr(model, 'language_model'):
-        layers = model.language_model.model.layers
-    else:
+        # layers = model.language_model.model.layers
+        if hasattr(model.language_model, 'model'):
+            layers = model.language_model.model.layers
+        else:
+            layers = model.language_model.layers
+    elif hasattr(model, 'model'):
         layers = model.model.layers
+    else:
+        # layers = model.model.layers
+        layers = model.layers
         
     for layer_idx in layers_to_control:
             
         control_vec = directions[layer_idx]
+        if not isinstance(control_vec, torch.Tensor):
+            control_vec = torch.tensor(control_vec)
         if len(control_vec.shape)==1:
             control_vec = control_vec.reshape(1,1,-1)
 
@@ -165,6 +222,17 @@ def hook_model(model, directions, layers_to_control, control_coef):
 
         def block_hook(module, input, output, control_vec=control_vec, control_coef=control_coef):
             new_output = output[0] if isinstance(output, tuple) else output
+
+            # print(new_output[0])
+            # print(new_output.shape)
+            # print(torch.max(new_output))
+            # print(torch.min(new_output))
+            # print(control_vec[0])
+            # print(control_vec.shape)
+            # print(torch.max(control_vec))
+            # print(torch.min(control_vec))
+            # asdf
+
             new_output = new_output + control_coef*control_vec.to(dtype=new_output.dtype, device=new_output.device)
             
             if isinstance(output, tuple):

@@ -405,6 +405,12 @@ class NeuralController:
             chat = [{"role": "user", "content": prompt}]
         elif self.llm.model_type == LLMType.GEMMA_TEXT:
             chat = [{"role": "user", "content": [{"type": "text", "text": prompt},]}]
+        elif self.llm.model_type == LLMType.QWEN_TEXT:
+            # chat = [{"role": "user", "content": prompt}]
+            chat = [
+                {"role": "system", "content": "You are a helpful assistant. You strictly follow the given instructions."},
+                {"role": "user", "content": prompt}
+            ]
         # if role=='assistant':
         #     chat = [{"role": "user", "content": 'Hello, assistant.'},
         #             {"role": "assistant", "content": prompt}]
@@ -445,9 +451,15 @@ class NeuralController:
 
     
     # ----------------------------------------------------
+    # needed only if thinking
     def format_prompt_qwen(self, prompt, role='user'):
-        if self.llm.model_type == LLMType.TEXT:
-            chat = [{"role": "user", "content": prompt}]
+        # mostly unused
+        if self.llm.model_type == LLMType.QWEN_TEXT:
+            # chat = [{"role": "user", "content": prompt}]
+            chat = [
+                {"role": "system", "content": "You are a helpful assistant. You strictly follow the given instructions."},
+                {"role": "user", "content": prompt}
+            ]
 
         out = self.tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True, enable_thinking=False,).strip()
         return out
@@ -455,11 +467,25 @@ class NeuralController:
     def generate_qwen(self, plaintext_prompt, image=None, layers_to_control=[], control_coef=0.4, **kwargs):        
 
         # prompt = plaintext_prompt
-        prompt = self.format_prompt_qwen(plaintext_prompt)
+        # prompt = self.format_prompt_qwen(plaintext_prompt) # needed only if thinking
+        prompt = self.format_prompt(plaintext_prompt)
+        
         if len(layers_to_control) == 0:
-            return generation_utils.generate_on_text(self.model, self.tokenizer, prompt, **kwargs)
+            return generation_utils.generate_on_text_qwen(self.model, self.tokenizer, prompt, **kwargs)
         else:
-            return self._controlled_generate(prompt, layers_to_control, control_coef, **kwargs)
+            return self._controlled_generate_qwen(prompt, layers_to_control, control_coef, **kwargs)
+        
+    def _controlled_generate_qwen(self, prompt, layers_to_control, control_coef, **kwargs):
+        ## define hooks
+        hooks = generation_utils.hook_model(self.model, self.directions, layers_to_control, control_coef)
+
+        ## do forward pass
+        out = generation_utils.generate_on_text_qwen(self.model, self.tokenizer, prompt, **kwargs)
+
+        ## clear hooks
+        generation_utils.clear_hooks(hooks)
+        return out
+
     
     
     # def generate_base(self, plaintext_prompt, image=None, layers_to_control=[], control_coef=0.4, **kwargs):        

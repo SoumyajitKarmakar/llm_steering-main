@@ -72,6 +72,9 @@ class RFMToolkit():
         directions = {}
         detector_coefs = {}
 
+        method = kwargs.get('method', 'lstsq')
+        print(f"\nUsing {method} sovler for xRFM!!\n")
+
         for layer_to_eval in tqdm(hidden_layers):
             hidden_states_at_layer = hidden_states[layer_to_eval].cuda().float()
             train_X = hidden_states_at_layer[train_indices] 
@@ -81,7 +84,7 @@ class RFMToolkit():
             assert(len(val_X) == len(val_y))
 
             # Use the xRFM-based train_rfm_probe_on_concept
-            u = direction_utils.train_rfm_probe_on_concept(train_X, train_y, val_X, val_y, hyperparams)
+            u = direction_utils.train_rfm_probe_on_concept(train_X, train_y, val_X, val_y, hyperparams, method=method)
             
             if u is None:
                 directions[layer_to_eval] = torch.zeros(1, train_X.shape[1], device='cuda')

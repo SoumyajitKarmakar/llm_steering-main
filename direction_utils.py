@@ -129,7 +129,8 @@ def get_hidden_states(prompts, llm, model, tokenizer, hidden_layers, forward_bat
         encoded_inputs = tokenizer(prompts, return_tensors='pt', padding=True).to(model.device)
     else:
         encoded_inputs = tokenizer(prompts, return_tensors='pt', padding=True, add_special_tokens=False).to(model.device)
-        encoded_inputs['attention_mask'] = encoded_inputs['attention_mask'].half()
+        # encoded_inputs['attention_mask'] = encoded_inputs['attention_mask'].half()
+        encoded_inputs['attention_mask'] = encoded_inputs['attention_mask'].to(model.dtype)
 
     
     dataset = TensorDataset(encoded_inputs['input_ids'], encoded_inputs['attention_mask'])
@@ -583,3 +584,18 @@ if __name__ == "__main__":
         val_preds = val_X @ u_orig.reshape(-1, 1)
         val_corr = torch.corrcoef(torch.cat((val_preds, val_y), dim=-1).T)[0, 1].item()
         print(f"Validation correlation: {val_corr:.4f}")
+
+    # --------------------------------------
+    # Top 10 dimensions:
+    # Dim 0: -0.5512
+    # Dim 1: -0.3333
+    # Dim 2: -0.3250
+    # Dim 4: -0.3221
+    # Dim 3: -0.2563
+    # Dim 111: 0.0947
+    # Dim 97: -0.0856
+    # Dim 139: -0.0715
+    # Dim 273: -0.0652
+    # Dim 474: -0.0649
+    # Validation correlation: -0.9425
+    # --------------------------------------

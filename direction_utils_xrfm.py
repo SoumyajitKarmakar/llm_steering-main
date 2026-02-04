@@ -48,7 +48,8 @@ from xrfm.rfm_src import RFM
 
 def train_rfm_probe_on_concept(train_X, train_y, val_X, val_y, hyperparams,
                                bws=[1, 10, 100],
-                               regs=[1e-3]):
+                               regs=[1e-3],
+                               method='lstsq'):
     """
     Train an RFM probe to find the steering vector for a concept.
     
@@ -130,13 +131,16 @@ def train_rfm_probe_on_concept(train_X, train_y, val_X, val_y, hyperparams,
                     verbose=False,
                     tuning_metric='mse',  # Use MSE for regression-style steering
                 )
+
+                # model.label_centering = False
+                # model.classification = True
                 
                 # Fit the model
                 model.fit(
                     train_data=(train_X_processed, train_y),
                     val_data=(val_X_processed, val_y),
                     reg=reg,
-                    method='lstsq',  # Use least squares solver
+                    method=method,  # Use least squares solver
                     verbose=False,
                     early_stop_rfm=True,
                 )
@@ -246,7 +250,9 @@ if __name__ == "__main__":
         train_X.clone(), train_y.clone(), 
         val_X.clone(), val_y.clone(), 
         hyperparams,
-        bws=[1, 10, 100]
+        bws=[1, 10, 100],
+        # method='lstsq',
+        method='eigenpro',
     )
     xrfm_time = time.time() - start_time
     
@@ -275,67 +281,83 @@ if __name__ == "__main__":
     else:
         print("ERROR: Steering vector is None!")
     
-    print()
-    print("="*70)
-    print("To compare with original, run this in a separate Python session:")
-    print("="*70)
-    print("""
-# Copy this code to test the original direction_utils.py:
 
-import torch
-import numpy as np
-import time
+    # --------------------------------------
+    # Top 10 dimensions (by absolute weight):
+    # Dim 0: -0.5969
+    # Dim 1: -0.3375
+    # Dim 2: -0.3247
+    # Dim 4: -0.3200
+    # Dim 3: -0.2525
+    # Dim 111: 0.0742
+    # Dim 254: 0.0631
+    # Dim 135: 0.0612
+    # Dim 90: -0.0599
+    # Dim 97: -0.0569
 
-# Set seeds for reproducibility (same as above)
-torch.manual_seed(42)
-np.random.seed(42)
+    # Validation correlation: -0.9416
+    # --------------------------------------
 
-# Create SAME synthetic test data
-n_train = 200
-n_val = 50
-d = 512
-concept_dims = 5
-
-train_X = torch.randn(n_train, d).cuda()
-val_X = torch.randn(n_val, d).cuda()
-
-train_y = (train_X[:, 0] > 0).float().unsqueeze(1).cuda()
-val_y = (val_X[:, 0] > 0).float().unsqueeze(1).cuda()
-
-train_X[:, :concept_dims] += train_y * 2.0
-val_X[:, :concept_dims] += val_y * 2.0
-
-hyperparams = {'n_components': 1, 'rfm_iters': 10, 'forward_batch_size': 16}
-
-# Import and run original
-from direction_utils import train_rfm_probe_on_concept
-
-print("Running original adit_rfm version...")
-start_time = time.time()
-u_orig = train_rfm_probe_on_concept(
-    train_X.clone(), train_y.clone(), 
-    val_X.clone(), val_y.clone(), 
-    hyperparams,
-    bws=[1, 10, 100]
-)
-orig_time = time.time() - start_time
-
-print(f"Original completed in {orig_time:.2f}s")
-if u_orig is not None:
-    # Flatten to 1D if needed (handles both 1D and 2D outputs)
-    u_orig = u_orig.flatten()
+    # print()
+    # print("="*70)
+    # print("To compare with original, run this in a separate Python session:")
+    # print("="*70)
     
-    print(f"Steering vector shape: {u_orig.shape}")
-    print(f"Steering vector norm: {torch.norm(u_orig).item():.4f}")
-    
-    top_k = 10
-    top_indices = torch.argsort(torch.abs(u_orig), descending=True)[:top_k]
-    print(f"Top {top_k} dimensions:")
-    for i, idx in enumerate(top_indices):
-        print(f"  Dim {idx.item()}: {u_orig[idx].item():.4f}")
-    
-    # Reshape to column vector for matrix multiplication
-    val_preds = val_X @ u_orig.reshape(-1, 1)
-    val_corr = torch.corrcoef(torch.cat((val_preds, val_y), dim=-1).T)[0, 1].item()
-    print(f"Validation correlation: {val_corr:.4f}")
-""")
+    # # Copy this code to test the original direction_utils.py:
+
+    # import torch
+    # import numpy as np
+    # import time
+
+    # # Set seeds for reproducibility (same as above)
+    # torch.manual_seed(42)
+    # np.random.seed(42)
+
+    # # Create SAME synthetic test data
+    # n_train = 200
+    # n_val = 50
+    # d = 512
+    # concept_dims = 5
+
+    # train_X = torch.randn(n_train, d).cuda()
+    # val_X = torch.randn(n_val, d).cuda()
+
+    # train_y = (train_X[:, 0] > 0).float().unsqueeze(1).cuda()
+    # val_y = (val_X[:, 0] > 0).float().unsqueeze(1).cuda()
+
+    # train_X[:, :concept_dims] += train_y * 2.0
+    # val_X[:, :concept_dims] += val_y * 2.0
+
+    # hyperparams = {'n_components': 1, 'rfm_iters': 10, 'forward_batch_size': 16}
+
+    # # Import and run original
+    # from direction_utils import train_rfm_probe_on_concept
+
+    # print("Running original adit_rfm version...")
+    # start_time = time.time()
+    # u_orig = train_rfm_probe_on_concept(
+    #     train_X.clone(), train_y.clone(), 
+    #     val_X.clone(), val_y.clone(), 
+    #     hyperparams,
+    #     bws=[1, 10, 100]
+    # )
+    # orig_time = time.time() - start_time
+
+    # print(f"Original completed in {orig_time:.2f}s")
+    # if u_orig is not None:
+    #     # Flatten to 1D if needed (handles both 1D and 2D outputs)
+    #     u_orig = u_orig.flatten()
+        
+    #     print(f"Steering vector shape: {u_orig.shape}")
+    #     print(f"Steering vector norm: {torch.norm(u_orig).item():.4f}")
+        
+    #     top_k = 10
+    #     top_indices = torch.argsort(torch.abs(u_orig), descending=True)[:top_k]
+    #     print(f"Top {top_k} dimensions:")
+    #     for i, idx in enumerate(top_indices):
+    #         print(f"  Dim {idx.item()}: {u_orig[idx].item():.4f}")
+        
+    #     # Reshape to column vector for matrix multiplication
+    #     val_preds = val_X @ u_orig.reshape(-1, 1)
+    #     val_corr = torch.corrcoef(torch.cat((val_preds, val_y), dim=-1).T)[0, 1].item()
+    #     print(f"Validation correlation: {val_corr:.4f}")

@@ -5,17 +5,20 @@ from pathlib import Path
 notebook_path = Path().absolute()
 sys.path.append(str(notebook_path.parent))
 
-
+import gc
 
 import torch
 import numpy as np
 from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import BitsAndBytesConfig
+from transformers import Gemma3ForCausalLM
 from utils import LLMType
 
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from neural_controllers import NeuralController
+# from neural_controllers import NeuralController
+from neural_controllers_xrfm import NeuralController
 from collections import namedtuple
 
 # from scipy.linalg import eigh
@@ -99,58 +102,158 @@ def select_llm(model_type, MODEL_VERSION='3.1', MODEL_SIZE='8B', base=False):
             model_id = "google/gemma-3-1b-it"
         elif MODEL_VERSION == '3' and MODEL_SIZE == '12B':
             model_id = "google/gemma-3-12b-it"
+        elif MODEL_VERSION == '2' and MODEL_SIZE == '9B':
+            model_id = "google/gemma-2-9b-it"
 
         tokenizer = AutoTokenizer.from_pretrained(model_id)
 
-        # language_model = Gemma3ForCausalLM.from_pretrained(
-        #     model_id, quantization_config=quantization_config
-        # ).eval()
+        if MODEL_VERSION == '2':
+            language_model = AutoModelForCausalLM.from_pretrained(
+                model_id,
+                device_map="auto",
+                torch_dtype=torch.bfloat16,
+                cache_dir=custom_cache_dir,
+                attn_implementation="eager",
+            )
+        elif MODEL_VERSION == '3':
+            # language_model = Gemma3ForCausalLM.from_pretrained(
+            #     model_id, quantization_config=quantization_config
+            # ).eval()
 
-        language_model = Gemma3ForCausalLM.from_pretrained(
-            model_id, device_map="cuda", torch_dtype="auto", cache_dir=custom_cache_dir,
-        ).eval()
+            language_model = Gemma3ForCausalLM.from_pretrained(
+                model_id, device_map="cuda", torch_dtype=torch.bfloat16, cache_dir=custom_cache_dir, attn_implementation="eager",
+            ).eval()
+
+            # language_model = Gemma3ForCausalLM.from_pretrained(
+            #     model_id, quantization_config=quantization_config, cache_dir=custom_cache_dir,
+            # ).eval()
 
         if MODEL_VERSION == '3' and MODEL_SIZE == '1B':
             model_name='gemma_3_1b_it_eng_only'
         elif MODEL_VERSION == '3' and MODEL_SIZE == '12B':
             model_name='gemma_3_12b_it_eng_only'
+        elif MODEL_VERSION == '2' and MODEL_SIZE == '9B':
+            model_name='gemma_2_9b_it_eng_only'
 
         processor = None
         llm_type = LLMType.GEMMA_TEXT
-
-        # print(tokenizer.chat_template)
-
-    elif model_type=='qwen':
-
-        if MODEL_VERSION == '3' and MODEL_SIZE == '8B':
-            model_id = "Qwen/Qwen3-8B"
-
-        language_model = AutoModelForCausalLM.from_pretrained(
-            model_id, device_map="cuda", torch_dtype="auto", cache_dir=custom_cache_dir,
-        )
-
-
-        # use_fast_tokenizer = "LlamaForCausalLM" not in language_model.config.architectures
-        # tokenizer = AutoTokenizer.from_pretrained(model_id, use_fast=use_fast_tokenizer, padding_side="left", legacy=False)
-        tokenizer = AutoTokenizer.from_pretrained(model_id)
-        tokenizer.pad_token_id = 0
-
-        if MODEL_VERSION == '3' and MODEL_SIZE == '8B':
-            model_name='qwen_3_8b_eng_only'
-
-        processor = None
-        llm_type = LLMType.TEXT
-
-        language_model.generation_config.pad_token_id = tokenizer.pad_token_id # to disable the warning
 
         language_model.generation_config.temperature=None # to disable the stupid warnings
         language_model.generation_config.top_p=None # to disable the stupid warnings
         language_model.generation_config.top_k=None # to disable the stupid warnings
 
+        # print(tokenizer.chat_template)
+
+    elif model_type=='qwen':
+
+        if MODEL_VERSION == '2.5' and MODEL_SIZE == '14B':
+            # model_id = "unsloth/Qwen2.5-14B-Instruct-bnb-4bit"
+            model_id = "Qwen/Qwen2.5-14B-Instruct"
+        elif MODEL_VERSION == '3' and MODEL_SIZE == '8B':
+            model_id = "Qwen/Qwen3-8B"
+        elif MODEL_VERSION == '3' and MODEL_SIZE == '4B':
+            model_id = "Qwen/Qwen3-4B-Instruct-2507"
+        elif MODEL_VERSION == '3' and MODEL_SIZE == '14B':
+            model_id = "Qwen/Qwen3-14B"
+        elif MODEL_VERSION == '3' and MODEL_SIZE == '32B':
+            model_id = "Qwen/Qwen3-32B"
+        elif MODEL_VERSION == '3' and MODEL_SIZE == '30B':
+            model_id = "Qwen/Qwen3-30B-A3B-Instruct-2507"
+        elif MODEL_VERSION == '3t' and MODEL_SIZE == '30B':
+            model_id = "Qwen/Qwen3-30B-A3B-Thinking-2507"
+
+        if MODEL_VERSION == '2.5':
+            language_model = AutoModelForCausalLM.from_pretrained(
+                # model_id, device_map="cuda", torch_dtype="auto", cache_dir=custom_cache_dir, attn_implementation="eager",
+                model_id, device_map="cuda", torch_dtype="auto", cache_dir=custom_cache_dir,
+            )
+            
+        else:
+            language_model = AutoModelForCausalLM.from_pretrained(
+                model_id, device_map="cuda", torch_dtype="auto", cache_dir=custom_cache_dir,
+            )
+
+
+        # use_fast_tokenizer = "LlamaForCausalLM" not in language_model.config.architectures
+        # tokenizer = AutoTokenizer.from_pretrained(model_id, use_fast=use_fast_tokenizer, padding_side="left", legacy=False)
+        tokenizer = AutoTokenizer.from_pretrained(model_id)
+
+        # tokenizer.pad_token_id = 0
+
+        if MODEL_VERSION == '2.5' and MODEL_SIZE == '14B':
+            # model_name='un_qwen_2.5_14b_it_eng_only'
+            model_name='qwen_2.5_14b_it_eng_only'
+        elif MODEL_VERSION == '3' and MODEL_SIZE == '8B':
+            model_name='qwen_3_8b_eng_only'
+        elif MODEL_VERSION == '3' and MODEL_SIZE == '4B':
+            model_name='qwen_3_4b_it_eng_only'
+        elif MODEL_VERSION == '3' and MODEL_SIZE == '14B':
+            model_name='qwen_3_14b_eng_only'
+        elif MODEL_VERSION == '3' and MODEL_SIZE == '32B':
+            model_name='qwen_3_32b_eng_only'
+        elif MODEL_VERSION == '3' and MODEL_SIZE == '30B':
+            model_name='qwen_3_30b_it_eng_only'
+        elif MODEL_VERSION == '3t' and MODEL_SIZE == '30B':
+            model_name='qwen_3_30b_th_eng_only'
+
+        processor = None
+        # llm_type = LLMType.TEXT
+        llm_type = LLMType.QWEN_TEXT
+
+        # -------------------------------
+        language_model.generation_config.pad_token_id = tokenizer.pad_token_id # to disable the warning
+
+        language_model.generation_config.temperature=None # to disable the stupid warnings
+        language_model.generation_config.top_p=None # to disable the stupid warnings
+        language_model.generation_config.top_k=None # to disable the stupid warnings
+        # -------------------------------
+
     llm = LLM(language_model, tokenizer, processor, model_name, llm_type)
     # print(llm.language_model)
+    
     return llm
 
+
+def compute_save_directions(llm, dataset, concept, control_method='rfm', solver='lstsq', path='directions/'):
+
+    if os.path.exists(os.path.join(path, f'{control_method}_{concept}_{llm.name}.pkl')):
+        print(f"'{os.path.join(path, f'{control_method}_{concept}_{llm.name}.pkl')}' exists, skipping it.")
+        return
+
+    concept_types = [concept]
+    for concept_type in concept_types:
+        controller = NeuralController(
+            llm,
+            llm.tokenizer,
+            rfm_iters=8,
+            control_method=control_method,
+            n_components=1,
+        )
+        controller.compute_directions(dataset[concept_type]['train']['inputs'], dataset[concept_type]['train']['labels'], method=solver)
+
+        controller.save(concept=f'{concept_type}', model_name=llm.name, path=path)        
+
+
+
+def compute_save_directions_translate(llm, dataset, concept, control_method='rfm', orig_lang="", solver='lstsq', path='directions/'):
+
+    if os.path.exists(os.path.join(path, f'{control_method}_{orig_lang}TO{concept}_{llm.name}.pkl')):
+        print(f"'{os.path.join(path, f'{control_method}_{orig_lang}TO{concept}_{llm.name}.pkl')}' exists, skipping it.")
+        return
+
+    
+    concept_types = [concept]
+    for concept_type in concept_types:
+        controller = NeuralController(
+            llm,
+            llm.tokenizer,
+            rfm_iters=8,
+            control_method=control_method,
+            n_components=1,
+        )
+        controller.compute_directions(dataset[concept_type]['train']['inputs'], dataset[concept_type]['train']['labels'], method=solver)
+
+        controller.save_translate(concept=f'{concept_type}', model_name=llm.name, orig_lang=orig_lang, path=path)     
 
 def compare_pearson(concept1, concept2):
     total_v = 0
@@ -259,7 +362,8 @@ def test_concept_vector(controller, concept="___", prompts=[], coef=0.75, max_to
             else:
                 original_output = controller.generate(prompt, image=image, max_new_tokens=max_tokens, do_sample=False)#, temperature=0)
             
-            print(clean_llama(original_output))
+            # print(clean_llama(original_output))
+            print(original_output)
 
         print(f"\n========================== + {concept} Control (normal) ==========================")
         if qwen:
@@ -277,7 +381,8 @@ def test_concept_vector(controller, concept="___", prompts=[], coef=0.75, max_to
                                                 max_new_tokens=max_tokens,
                                                 do_sample=False)
         
-        print(clean_llama(steered_output))
+        # print(clean_llama(steered_output))
+        print(steered_output)
 
         outputs.append(steered_output)
 
@@ -367,6 +472,30 @@ def read_tuples_as_list(llm, antonyms, path='../directions_moods/'):
 
 #     return X, Y
 
+
+
+def read_tuples_multiple(llm, antonyms, paths=['../directions_moods/']):
+    hidden_layers = list(range(-1, -llm.language_model.config.num_hidden_layers, -1))
+
+    Xt = {i: [] for i in hidden_layers}
+    Yt = {i: [] for i in hidden_layers}
+
+    for path in paths:
+        for t in antonyms:
+            dir1 = just_dirs(llm, t[0], path=path)
+            dir2 = just_dirs(llm, t[1], path=path)
+
+            for k in Xt:
+                Xt[k].append(dir1[k])
+                Yt[k].append(dir2[k])
+
+    X = {i: torch.cat(Xt[i]).to("cuda") for i in hidden_layers}
+    Y = {i: torch.cat(Yt[i]).to("cuda") for i in hidden_layers}
+
+    return X, Y
+
+
+
 def read_tuples(llm, antonyms, path='../directions_moods/'):
     hidden_layers = list(range(-1, -llm.language_model.config.num_hidden_layers, -1))
 
@@ -407,7 +536,7 @@ def read_tuples_with_category(llm, antonyms, path='../directions_moods/'):
 
 def read_tuples_single_with_category(llm, words, path='../directions_moods/', hidden_layers=None):
     if hidden_layers is None:
-        hidden_layers = list(range(-1, -llm.language_model.config.num_hidden_layers, -1))
+        hidden_layers = list(range(-llm.language_model.config.num_hidden_layers+1, 0))
 
     Xt = {i: [] for i in hidden_layers}
 
@@ -419,6 +548,52 @@ def read_tuples_single_with_category(llm, words, path='../directions_moods/', hi
 
     X = {i: torch.cat(Xt[i]).to("cuda") for i in hidden_layers}
 
+    return X
+
+def read_single_translate(llm, fix_lang, other_langs, path, source_shift=True, hidden_layers=None):
+    if hidden_layers is None:
+        hidden_layers = list(range(-1, -llm.language_model.config.num_hidden_layers, -1))
+
+    Xt = {i: [] for i in hidden_layers}
+
+    if source_shift:
+        print("Source Constant")
+        for other_lang in other_langs:
+            tcontroller = NeuralController(
+                llm,
+                llm.tokenizer,
+                rfm_iters=8,
+                control_method="rfm",
+                n_components=1
+            )
+
+            tcontroller.load_translate(concept=other_lang, model_name=llm.name, orig_lang=fix_lang, path=path)
+
+            dirs = tcontroller.directions
+
+            for k in Xt:
+                Xt[k].append(dirs[k])
+    else:
+        print("Destination Constant")
+        for other_lang in other_langs:
+            tcontroller = NeuralController(
+                llm,
+                llm.tokenizer,
+                rfm_iters=8,
+                control_method="rfm",
+                n_components=1
+            )
+
+            tcontroller.load_translate(concept=fix_lang, model_name=llm.name, orig_lang=other_lang, path=path)
+
+            dirs = tcontroller.directions
+
+            for k in Xt:
+                Xt[k].append(dirs[k])
+    
+    
+    X = {i: torch.cat(Xt[i]).to("cuda") for i in hidden_layers}
+    
     return X
 
 

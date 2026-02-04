@@ -19,6 +19,7 @@ from copy import deepcopy
 class LLMType(Enum):
     TEXT = auto()
     GEMMA_TEXT = auto()
+    QWEN_TEXT = auto()
     MULTIMODAL = auto()
     MULTIMODAL_DEEPSEEK = auto()
 
@@ -2192,7 +2193,102 @@ def programming_language_dataset(llm, orig_lang, other_lang):
     return formatted_data
 
 
-def pca_programming_language_dataset(concept_types, tokenizer):
+# def pca_programming_language_dataset(concept_types, tokenizer):
+#     random.seed(0)
+
+#     user_template = 'Complete the translation of the following program in {orig_lang} to {new_lang}. \nProgram:\n```{program}```\nTranslation:\n```{partial}'
+    
+#     from datasets import load_dataset
+#     huggingface_dataset = load_dataset("greengerong/leetcode")
+#     huggingface_dataset = huggingface_dataset["train"]
+
+#     other_lang = concept_types[1]
+#     python_programs = huggingface_dataset['python']
+#     other_programs = huggingface_dataset[other_lang]
+    
+
+#     raw_data = {}
+#     raw_data['python'] = python_programs
+#     raw_data[other_lang] = other_programs
+    
+#     def extract_code(c):
+#         items = c.split("```")
+#         code = items[1]
+#         return code
+    
+#     formatted_data = {}
+#     for concept_type in concept_types:
+        
+#         orig_lang = concept_type
+#         other_lang = [k for k in raw_data.keys() if k != orig_lang][0]
+        
+#         n=500
+#         c_e, o_e = raw_data[orig_lang][:n], raw_data[other_lang][:n]
+        
+#         data = []
+#         for old, new in zip(c_e, o_e):
+            
+#             old = extract_code(old)
+#             new = extract_code(new)
+            
+#             pair = []
+#             idx = max(len(new)//2, 1)
+
+            
+#             partial = new[:idx]
+#             prompt = user_template.format(orig_lang=orig_lang, new_lang=orig_lang, 
+#                                                 program=old, partial=partial)
+#             chat = [
+#                     {
+#                         "role": "user", 
+#                         "content": prompt
+#                     },
+#             ]
+#             pair.append(tokenizer.apply_chat_template(chat, tokenize=False))
+            
+#             idx = max(len(old)//2, 1)                        
+#             # same lang
+#             partial = old[:idx]
+#             prompt = user_template.format(orig_lang=orig_lang, new_lang=other_lang, 
+#                                                 program=old, partial=partial)
+            
+#             chat = [
+#                     {
+#                         "role": "user", 
+#                         "content": prompt
+#                     },
+#             ]
+#             pair.append(tokenizer.apply_chat_template(chat, tokenize=False))
+            
+#             data.append(pair)
+            
+            
+#         n = 150
+#         train_data = data[:n]
+#         test_data = data[n:2*n]
+
+#         train_labels = []
+#         for d in train_data:
+#             true_s = d[0]
+#             random.shuffle(d)
+#             train_labels.append([s == true_s for s in d])
+        
+#         # train_labels = np.concatenate(train_labels).tolist()
+#         test_labels = [[1,0] for _ in range(len(test_data))]
+        
+#         train_data = np.concatenate(train_data).tolist()
+#         test_data = np.concatenate(test_data).tolist()
+        
+#         print("train", len(train_data), "test_data", len(test_data))
+
+#         formatted_data[orig_lang] = {
+#             'train': {'inputs': train_data, 'labels': train_labels},
+#             'test': {'inputs': test_data, 'labels': test_labels}
+#         }
+        
+#     return formatted_data
+
+def pca_programming_language_dataset(concept_types, tokenizer, n_pairs=150):
     random.seed(0)
 
     user_template = 'Complete the translation of the following program in {orig_lang} to {new_lang}. \nProgram:\n```{program}```\nTranslation:\n```{partial}'
@@ -2235,7 +2331,7 @@ def pca_programming_language_dataset(concept_types, tokenizer):
 
             
             partial = new[:idx]
-            prompt = user_template.format(orig_lang=orig_lang, new_lang=orig_lang, 
+            prompt = user_template.format(orig_lang=orig_lang, new_lang=other_lang, 
                                                 program=old, partial=partial)
             chat = [
                     {
@@ -2245,10 +2341,11 @@ def pca_programming_language_dataset(concept_types, tokenizer):
             ]
             pair.append(tokenizer.apply_chat_template(chat, tokenize=False))
             
-            idx = max(len(old)//2, 1)                        
+            
             # same lang
+            idx = max(len(old)//2, 1)
             partial = old[:idx]
-            prompt = user_template.format(orig_lang=orig_lang, new_lang=other_lang, 
+            prompt = user_template.format(orig_lang=orig_lang, new_lang=orig_lang, 
                                                 program=old, partial=partial)
             
             chat = [
@@ -2262,9 +2359,8 @@ def pca_programming_language_dataset(concept_types, tokenizer):
             data.append(pair)
             
             
-        n = 150
-        train_data = data[:n]
-        test_data = data[n:2*n]
+        train_data = data[:n_pairs]
+        test_data = data[n_pairs:2*n_pairs]
 
         train_labels = []
         for d in train_data:
@@ -2272,7 +2368,6 @@ def pca_programming_language_dataset(concept_types, tokenizer):
             random.shuffle(d)
             train_labels.append([s == true_s for s in d])
         
-        # train_labels = np.concatenate(train_labels).tolist()
         test_labels = [[1,0] for _ in range(len(test_data))]
         
         train_data = np.concatenate(train_data).tolist()
@@ -2778,7 +2873,7 @@ def hallucination_dataset(data_path, llm, seed: int = 0):
 
 
 # ['english', 'french', 'german', 'hindi', 'italian', 'portuguese', 'spanish', 'thai']
-def multilingual_dataset(llm, orig_lang, other_lang, seed=0):
+def multilingual_dataset(llm, orig_lang, other_lang, extended=False, n = 200, seed=0):
     tokenizer = llm.tokenizer
     random.seed(0)
     
@@ -2789,13 +2884,55 @@ def multilingual_dataset(llm, orig_lang, other_lang, seed=0):
     lang_map = {
         'english': 'eng_Latn',
         'german': 'deu_Latn',
-        # 'chinese': 'zho_Hans',
         'hindi': 'hin_Deva',
         'spanish': 'spa_Latn',
         'french': 'fra_Latn',
         'italian': 'ita_Latn',
         'portuguese': 'por_Latn',
         'thai': 'tha_Thai',
+        'chinese_simplified': 'zho_Hans',
+        'chinese_traditional': 'zho_Hant',
+        'japanese': 'jpn_Jpan',
+        'korean': 'kor_Hang',
+        'russian': 'rus_Cyrl',
+        'arabic': 'arb_Arab',
+        'vietnamese': 'vie_Latn',
+        'indonesian': 'ind_Latn',
+        'turkish': 'tur_Latn',
+        'polish': 'pol_Latn',
+        'dutch': 'nld_Latn',
+        'ukrainian': 'ukr_Cyrl',
+        'czech': 'ces_Latn',
+        'romanian': 'ron_Latn',
+        'greek': 'ell_Grek',
+        'hungarian': 'hun_Latn',
+        'swedish': 'swe_Latn',
+        'danish': 'dan_Latn',
+        'finnish': 'fin_Latn',
+        'norwegian': 'nob_Latn',  # Norwegian Bokmål
+        'bulgarian': 'bul_Cyrl',
+        'serbian': 'srp_Cyrl',    # Often defaults to Cyrillic in FLORES
+        'croatian': 'hrv_Latn',
+        'slovak': 'slk_Latn',
+        'lithuanian': 'lit_Latn',
+        'slovenian': 'slv_Latn',
+        'latvian': 'lvs_Latn',
+        'estonian': 'est_Latn',
+        'catalan': 'cat_Latn',
+        'hebrew': 'heb_Hebr',
+        'persian': 'pes_Arab',    # Western Persian (Farsi)
+        'tagalog': 'tgl_Latn',
+        'bengali': 'ben_Beng',
+        'urdu': 'urd_Arab',
+        'tamil': 'tam_Taml',
+        'telugu': 'tel_Telu',
+        'malayalam': 'mal_Mlym',
+        'kannada': 'kan_Knda',
+        'marathi': 'mar_Deva',
+        'gujarati': 'guj_Gujr',
+        'punjabi': 'pan_Guru',    # Eastern Panjabi
+        'malay': 'zsm_Latn',      # Standard Malay
+        'swahili': 'swh_Latn',
     }
 
     code_orig = lang_map.get(orig_lang, orig_lang)
@@ -2819,7 +2956,7 @@ def multilingual_dataset(llm, orig_lang, other_lang, seed=0):
     user_template = 'Complete the translation of the following statement in {orig_lang} to {new_lang}. \nStatement: {statement}\nTranslation: {partial}'
 
     # Use 200 samples to match language_dataset size
-    n = 200 
+    # n = 200 
     c_e, o_e = c_e[:n], o_e[:n]
 
     orig_texts = c_e + c_e
@@ -2830,8 +2967,11 @@ def multilingual_dataset(llm, orig_lang, other_lang, seed=0):
     data = []
     for old, new, new_lang in zip(orig_texts, new_texts, new_langs):
         
-        idx = max(len(new)//2, 1)
-        partial = new[:idx]
+        # idx = max(len(new)//2, 1)
+        # partial = new[:idx]
+        tokens = tokenizer.tokenize(new)
+        idx = max(len(tokens)//2, 1)
+        partial = tokenizer.convert_tokens_to_string(tokens[:idx])
         
         prompt = user_template.format(orig_lang=orig_lang, new_lang=new_lang, statement=old, partial=partial)
         chat = [
@@ -2840,6 +2980,7 @@ def multilingual_dataset(llm, orig_lang, other_lang, seed=0):
                 "content": prompt
                 }
         ]
+        # qwen check thinking or not.
         ex = tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True).strip()
         data.append(ex)
 
@@ -2856,4 +2997,206 @@ def multilingual_dataset(llm, orig_lang, other_lang, seed=0):
         'train': {'inputs': train_data, 'labels': train_labels},
     }
 
+    return formatted_data
+
+
+def literary_style_dataset(llm, concept_type='hemingway', concept_source=None, seed=0):
+    tokenizer = llm.tokenizer
+    data_dir = 'data/general_statements'
+    random.seed(0)
+
+    author_map = {
+        "hemingway": "Ernest Hemingway",
+        "faulkner": "William Faulkner",
+        "joyce": "James Joyce",
+        "austen": "Jane Austen",
+        "woolf": "Virginia Woolf",
+        "kafka": "Franz Kafka",
+        "stein": "Gertrude Stein",
+        "cummings": "E.E. Cummings",
+        "nabokov": "Vladimir Nabokov",
+        "wilde": "Oscar Wilde",
+        "twain": "Mark Twain",
+        "wodehouse": "P.G. Wodehouse",
+        "mccarthy": "Cormac McCarthy",
+        "carver": "Raymond Carver",
+        "bukowski": "Charles Bukowski",
+        "márquez": "Gabriel García Márquez",
+        "borges": "Jorge Luis Borges",
+        "thompson": "Hunter S. Thompson",
+        "lovecraft": "H.P. Lovecraft",
+        "pratchett": "Terry Pratchett",
+    }
+
+    print(f"Training towards: {concept_type}")
+    user_str = 'Write a response to the following statement in the literary style of {concept_type}. \nStatement: {statement}'
+    
+    if concept_source is None:
+        default_str = 'Write a response to the following statement. \nStatement: {statement}'
+    else:
+        print(f"Training away from: {concept_source}")
+        default_str = 'Write a response to the following statement in the literary style of {concept_type}. \nStatement: {statement}'
+
+    with open(os.path.join(data_dir, f"class_0.txt"), encoding="utf-8") as f:
+            raw_data = f.readlines()
+    with open(os.path.join(data_dir, f"class_1.txt"), encoding="utf-8") as f:
+            raw_data_2 = f.readlines()
+
+
+    csp_data = [user_str.format(concept_type=author_map[concept_type], statement=s) for s in raw_data]
+    
+    if concept_source is None:
+        ncsp_data = [default_str.format(statement=s) for s in raw_data_2]
+    else:
+        ncsp_data = [user_str.format(concept_type=author_map[concept_source], statement=s) for s in raw_data_2]
+
+    llm_type = llm.model_type
+
+    print(len(csp_data))
+    for idx, s in enumerate(csp_data):
+
+        if llm_type == LLMType.TEXT or llm_type == LLMType.MULTIMODAL:
+            chat = [
+            {
+                "role": "user", 
+                "content": s
+            },
+            ]
+        elif llm_type == LLMType.GEMMA_TEXT:
+            chat = [
+            {
+                "role": "user", 
+                "content": [{"type": "text", "text": s},]
+            },
+            ]
+        csp_data[idx] = tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True).strip()
+    for idx, s in enumerate(ncsp_data):
+        if llm_type == LLMType.TEXT or llm_type == LLMType.MULTIMODAL:
+            chat = [
+            {
+                "role": "user", 
+                "content": s
+            },
+            ]
+        elif llm_type == LLMType.GEMMA_TEXT:
+            chat = [
+            {
+                "role": "user", 
+                "content": [{"type": "text", "text": s},]
+            },
+            ]
+        ncsp_data[idx] = tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True).strip()
+
+    print(csp_data[0], ncsp_data[0])
+    formatted_data = {}
+
+    csp_labels = [1.] * len(csp_data)
+    ncsp_labels = [0.] * len(ncsp_data)
+    data = []
+    labels = []
+    for i in range(len(csp_data)):
+        data.append(csp_data[i])
+        data.append(ncsp_data[i])
+        labels.append(csp_labels[i])
+        labels.append(ncsp_labels[i])
+
+    train_data = data    
+    train_labels = labels
+    print("train", len(train_data))
+
+    formatted_data[concept_type] = {
+        'train': {'inputs': train_data, 'labels': train_labels},
+    }
+    f.close()
+    return formatted_data
+
+
+def programming_style_dataset(llm, prog_lang, concept_source=None, seed=0):
+    tokenizer = llm.tokenizer
+    data_dir = 'data/coding_statements'
+    random.seed(0)
+
+    print(f"Training towards: {prog_lang}")
+    # user_str = 'Write a simple program in {prog_lang} language to solve the following task:\n {task}'
+    user_str = 'In a few lines, write only the core logic in {prog_lang} language to solve the following task:\n {task}'
+    
+    if concept_source is None:
+        # default_str = 'Write a simple program to solve the following task:\n {task}'
+        default_str = 'In a few lines, write only the core logic to solve the following task:\n {task}'
+    else:
+        print(f"Training away from: {concept_source}")
+        # default_str = 'Write a simple program in {concept_source} language to solve the following task:\n {task}'
+        default_str = 'In a few lines, write only the core logic in {concept_source} language to solve the following task:\n {task}'
+
+    with open(os.path.join(data_dir, f"class_0.txt"), encoding="utf-8") as f:
+            raw_data = f.readlines()
+    with open(os.path.join(data_dir, f"class_1.txt"), encoding="utf-8") as f:
+            raw_data_2 = f.readlines()
+
+
+    csp_data = [user_str.format(prog_lang=prog_lang, task=s.strip()) for s in raw_data]
+    
+    if concept_source is None:
+        ncsp_data = [default_str.format(task=s.strip()) for s in raw_data_2]
+    else:
+        ncsp_data = [default_str.format(concept_source=concept_source, task=s.strip()) for s in raw_data_2]
+
+    llm_type = llm.model_type
+
+    print(len(csp_data))
+    for idx, s in enumerate(csp_data):
+
+        if llm_type == LLMType.TEXT or llm_type == LLMType.MULTIMODAL:
+            chat = [
+            {
+                "role": "user", 
+                "content": s
+            },
+            ]
+        elif llm_type == LLMType.GEMMA_TEXT:
+            chat = [
+            {
+                "role": "user", 
+                "content": [{"type": "text", "text": s},]
+            },
+            ]
+        csp_data[idx] = tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True).strip()
+    for idx, s in enumerate(ncsp_data):
+        if llm_type == LLMType.TEXT or llm_type == LLMType.MULTIMODAL:
+            chat = [
+            {
+                "role": "user", 
+                "content": s
+            },
+            ]
+        elif llm_type == LLMType.GEMMA_TEXT:
+            chat = [
+            {
+                "role": "user", 
+                "content": [{"type": "text", "text": s},]
+            },
+            ]
+        ncsp_data[idx] = tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True).strip()
+
+    print(csp_data[0], ncsp_data[0])
+    formatted_data = {}
+
+    csp_labels = [1.] * len(csp_data)
+    ncsp_labels = [0.] * len(ncsp_data)
+    data = []
+    labels = []
+    for i in range(len(csp_data)):
+        data.append(csp_data[i])
+        data.append(ncsp_data[i])
+        labels.append(csp_labels[i])
+        labels.append(ncsp_labels[i])
+
+    train_data = data    
+    train_labels = labels
+    print("train", len(train_data))
+
+    formatted_data[prog_lang] = {
+        'train': {'inputs': train_data, 'labels': train_labels},
+    }
+    
     return formatted_data
